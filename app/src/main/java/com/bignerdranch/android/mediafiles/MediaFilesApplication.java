@@ -2,45 +2,41 @@ package com.bignerdranch.android.mediafiles;
 
 import android.util.Log;
 
-import androidx.annotation.NonNull;
 import androidx.multidex.MultiDexApplication;
 
+import com.bignerdranch.android.mediafiles.dagger.DaggerGeneralComponent;
+import com.bignerdranch.android.mediafiles.dagger.GeneralComponent;
+import com.bignerdranch.android.mediafiles.dagger.GeneralModule;
 import com.bignerdranch.android.mediafiles.debug.StethoHelper;
+import com.bignerdranch.android.mediafiles.discovery.Discovery;
 import com.bignerdranch.android.mediafiles.discovery.db.PrepareDB;
+import com.bignerdranch.android.mediafiles.util.AsyncUtil;
 
-import io.reactivex.Completable;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
+import javax.inject.Inject;
 
 public class MediaFilesApplication extends MultiDexApplication {
+    @Inject protected Discovery discovery;
 
     @Override
     public void onCreate() {
         super.onCreate();
 
+        initDagger();
+
         Log.v("ShiyihuiHLNSKQ", "before init stetho");
         StethoHelper.init(this);
-        runOnIOThread(this::createDb);
+        AsyncUtil.runOnIOThread(this::createDb);
+    }
+
+    private void initDagger() {
+        final GeneralComponent component = DaggerGeneralComponent.builder()
+                .generalModule(new GeneralModule(this))
+                .build();
+
+        component.inject(this);
     }
 
     private void createDb() {
         PrepareDB.insertData(this);
-    }
-
-    private void runOnIOThread(@NonNull final Runnable runnable) {
-        final CompositeDisposable compositeDisposable = new CompositeDisposable();
-        compositeDisposable.add(
-                Completable.fromAction(runnable::run)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(Schedulers.io())
-                        .subscribe(
-                                () -> {
-                                    compositeDisposable.dispose();
-                                },
-
-                                throwable -> {
-                                    compositeDisposable.dispose();
-                                })
-        );
     }
 }
