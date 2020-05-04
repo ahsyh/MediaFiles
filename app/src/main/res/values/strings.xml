@@ -3,4 +3,32 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+
+
+    <!-- Login Activity -->
+    <string name="login_email">Email Address</string>
+    <string name="login_password">Password</string>
+    <string name="login_button">Login</string>
+    <string name="login_failed_toast">Login Failed</string>
+
+    <!-- Stats Banner -->
+    <string name="run_count_label">Run Count: </string>
+    <string name="added_count_label">Items Added: </string>
+
+    <!-- Discovery Activity -->
+    <string name="unified_item_button_label">Unified Item Dao: </string>
+    <string name="local_item_button_label">Local Item Dao: </string>
+    <string name="signout_label">Sign Out</string>
+
+    <!-- Item Layout -->
+    <string name="path_label">Path: </string>
+    <string name="unified_id_label">Unified Id: </string>
+    <string name="added_label">Added: </string>
+    <string name="taken_label">Taken: </string>
+    <string name="modified_label">Modified: </string>
+    <string name="uploaded_label">Uploaded: </string>
+    <string name="type_label">Type: </string>
+    <string name="local_count_label">Local Items: </string>
+    <string name="cloud_count_label">Cloud Items: </string>
+    <string name="dedupe_stage_label">Dedupe Stage: </string>
 </resources>

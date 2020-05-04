@@ -9,34 +9,36 @@ import com.bignerdranch.android.mediafiles.dagger.GeneralComponent;
 import com.bignerdranch.android.mediafiles.dagger.GeneralModule;
 import com.bignerdranch.android.mediafiles.debug.StethoHelper;
 import com.bignerdranch.android.mediafiles.discovery.Discovery;
-import com.bignerdranch.android.mediafiles.discovery.db.PrepareDB;
-import com.bignerdranch.android.mediafiles.util.AsyncUtil;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 
 public class MediaFilesApplication extends MultiDexApplication {
-    @Inject protected Discovery discovery;
+    @Inject protected Provider<Discovery> discovery;
+
+    protected static GeneralComponent appComponent;
+    public static GeneralComponent getAppComponent() {
+        return appComponent;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
 
         initDagger();
-
-        Log.v("ShiyihuiHLNSKQ", "before init stetho");
-        StethoHelper.init(this);
-        AsyncUtil.runOnIOThread(this::createDb);
+        init();
     }
 
     private void initDagger() {
-        final GeneralComponent component = DaggerGeneralComponent.builder()
+        appComponent = DaggerGeneralComponent.builder()
                 .generalModule(new GeneralModule(this))
                 .build();
 
-        component.inject(this);
+        appComponent.inject(this);
     }
 
-    private void createDb() {
-        PrepareDB.insertData(this);
+    private void init() {
+        StethoHelper.init(this);
+        discovery.get().initAsync();
     }
 }
