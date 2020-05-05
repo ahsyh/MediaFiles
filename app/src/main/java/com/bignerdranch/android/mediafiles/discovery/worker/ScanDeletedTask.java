@@ -17,7 +17,7 @@ public class ScanDeletedTask {
     @NonNull private final MediaStoreUtil mediaStoreUtil;
 
     public void run() {
-        Log.v("ShiyihuiHLNSKQ" , "ScanDeletedWorker start");
+        Log.v("ShiyihuiHLNSKQ" , "ScanDeletedWorker started");
         long pos = 0L;
         int pageSize = 200;
         boolean stopped = false;
