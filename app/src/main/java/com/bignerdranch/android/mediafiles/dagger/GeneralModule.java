@@ -3,12 +3,16 @@ package com.bignerdranch.android.mediafiles.dagger;
 import android.content.ContentResolver;
 import android.content.Context;
 
+import androidx.room.PrimaryKey;
+import androidx.work.WorkManager;
+
 import com.bignerdranch.android.mediafiles.discovery.Discovery;
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao;
 import com.bignerdranch.android.mediafiles.discovery.db.DiscoveryDatabase;
 import com.bignerdranch.android.mediafiles.discovery.worker.MediaStoreUtil;
-import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedWorker;
-import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedWorker;
+import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask;
+import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask;
+import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule;
 
 import javax.inject.Singleton;
 
@@ -45,10 +49,11 @@ public class GeneralModule {
     @Provides
     @Singleton
     Discovery provideDiscovery(
-            @NonNull final ScanAddedWorker scanAddedWorker,
-            @NonNull final ScanDeletedWorker scanDeletedWorker,
+            @NonNull final ScanAddedTask scanAddedTask,
+            @NonNull final ScanDeletedTask scanDeletedTask,
+            @NonNull final WorkerSchedule workerSchedule,
             @NonNull final MediaFileDao mediaFileDao) {
-        return new Discovery(mediaFileDao, scanAddedWorker, scanDeletedWorker);
+        return new Discovery(mediaFileDao, scanAddedTask, scanDeletedTask, workerSchedule);
     }
 
     @Provides
@@ -60,18 +65,18 @@ public class GeneralModule {
 
     @Provides
     @Singleton
-    ScanAddedWorker provideScanAddedWorker(
+    ScanAddedTask provideScanAddedWorker(
             @NonNull final MediaStoreUtil mediaStoreUtil,
             @NonNull final MediaFileDao mediaFileDao) {
-        return new ScanAddedWorker(mediaFileDao, mediaStoreUtil);
+        return new ScanAddedTask(mediaFileDao, mediaStoreUtil);
     }
 
     @Provides
     @Singleton
-    ScanDeletedWorker provideScanDeletedWorker(
+    ScanDeletedTask provideScanDeletedWorker(
             @NonNull final MediaStoreUtil mediaStoreUtil,
             @NonNull final MediaFileDao mediaFileDao) {
-        return new ScanDeletedWorker(mediaFileDao, mediaStoreUtil);
+        return new ScanDeletedTask(mediaFileDao, mediaStoreUtil);
     }
 
     @Provides
@@ -80,5 +85,17 @@ public class GeneralModule {
             @NonNull final ContentResolver contentResolver
     ) {
         return new MediaStoreUtil(contentResolver);
+    }
+
+    @Provides
+    @Singleton
+    WorkManager provideWorkManager(@NonNull final Context context) {
+        return WorkManager.getInstance(context);
+    }
+
+    @Provides
+    @Singleton
+    WorkerSchedule provideWorkerSchedule(@NonNull final WorkManager workManager) {
+        return new WorkerSchedule(workManager);
     }
 }

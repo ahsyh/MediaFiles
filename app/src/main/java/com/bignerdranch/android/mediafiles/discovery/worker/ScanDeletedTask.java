@@ -12,11 +12,11 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-public class ScanDeletedWorker {
+public class ScanDeletedTask {
     @NonNull private final MediaFileDao mediaFileDao;
     @NonNull private final MediaStoreUtil mediaStoreUtil;
 
-    public void doWork() {
+    public void run() {
         Log.v("ShiyihuiHLNSKQ" , "ScanDeletedWorker start");
         long pos = 0L;
         int pageSize = 200;
