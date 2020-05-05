@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao;
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile;
 
-@Database(entities = {MediaFile.class}, version = 2)
+@Database(entities = {MediaFile.class}, version = 1)
 public abstract class DiscoveryDatabase extends RoomDatabase {
 
     private static DiscoveryDatabase INSTANCE;

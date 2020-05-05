@@ -3,7 +3,6 @@ package com.bignerdranch.android.mediafiles.dagger;
 import android.content.ContentResolver;
 import android.content.Context;
 
-import androidx.room.PrimaryKey;
 import androidx.work.WorkManager;
 
 import com.bignerdranch.android.mediafiles.discovery.Discovery;

@@ -1,7 +1,5 @@
 package com.bignerdranch.android.mediafiles;
 
-import android.util.Log;
-
 import androidx.multidex.MultiDexApplication;
 
 import com.bignerdranch.android.mediafiles.dagger.DaggerGeneralComponent;

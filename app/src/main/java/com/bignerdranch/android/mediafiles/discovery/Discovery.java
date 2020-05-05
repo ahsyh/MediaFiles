@@ -2,21 +2,11 @@ package com.bignerdranch.android.mediafiles.discovery;
 
 import android.util.Log;
 
-import androidx.work.BackoffPolicy;
-import androidx.work.Constraints;
-import androidx.work.OneTimeWorkRequest;
-import androidx.work.WorkManager;
-
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao;
-import com.bignerdranch.android.mediafiles.discovery.model.MediaType;
-import com.bignerdranch.android.mediafiles.discovery.model.MediaUri;
-import com.bignerdranch.android.mediafiles.discovery.worker.MediaChangeWorker;
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask;
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask;
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule;
 import com.bignerdranch.android.mediafiles.util.AsyncUtil;
-
-import java.util.concurrent.TimeUnit;
 
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;

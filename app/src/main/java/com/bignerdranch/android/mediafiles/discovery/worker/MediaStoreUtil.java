@@ -21,7 +21,7 @@ public class MediaStoreUtil {
     @NonNull private final ContentResolver contentResolver;
 
 
-    public boolean isPathExist(
+    boolean isPathExist(
             @NonNull final MediaType mediaType,
             @NonNull final String path) {
         long count = 0;
@@ -45,10 +45,10 @@ public class MediaStoreUtil {
     }
 
     @NonNull
-    public List<MediaFile> fetchMediaFiles(
+    List<MediaFile> fetchMediaFiles(
             @NonNull final MediaType mediaType,
-            @NonNull final long offset,
-            @NonNull final int limit
+            final long offset,
+            final int limit
     ) {
         final List<MediaFile> result =  new ArrayList<>(limit);
         if (MediaUri.getUri(mediaType) == null) {
