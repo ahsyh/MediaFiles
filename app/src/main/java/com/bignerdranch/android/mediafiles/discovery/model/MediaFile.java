@@ -10,19 +10,19 @@ import lombok.Data;
 @Data
 public class MediaFile {
     @PrimaryKey(autoGenerate = true)
-    public int id;
+    public long id;
 
     @ColumnInfo(name = "ms_id")
-    public int mediaStoreId;
+    public long mediaStoreId;
 
     @ColumnInfo(name = "path")
     public String path;
 
     @ColumnInfo(name = "size")
-    public int size;
+    public long size;
 
     @ColumnInfo(name = "date_added")
-    public int dateAdded;
+    public long dateAdded;
 
     // Getters and setters are ignored for brevity,
     // but they're required for Room to work.

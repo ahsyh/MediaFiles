@@ -1,10 +1,14 @@
 package com.bignerdranch.android.mediafiles.dagger;
 
+import android.content.ContentResolver;
 import android.content.Context;
 
 import com.bignerdranch.android.mediafiles.discovery.Discovery;
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao;
 import com.bignerdranch.android.mediafiles.discovery.db.DiscoveryDatabase;
+import com.bignerdranch.android.mediafiles.discovery.worker.MediaStoreUtil;
+import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedWorker;
+import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedWorker;
 
 import javax.inject.Singleton;
 
@@ -41,8 +45,40 @@ public class GeneralModule {
     @Provides
     @Singleton
     Discovery provideDiscovery(
-            @NonNull final DiscoveryDatabase db,
+            @NonNull final ScanAddedWorker scanAddedWorker,
+            @NonNull final ScanDeletedWorker scanDeletedWorker,
             @NonNull final MediaFileDao mediaFileDao) {
-        return new Discovery(db, mediaFileDao);
+        return new Discovery(mediaFileDao, scanAddedWorker, scanDeletedWorker);
+    }
+
+    @Provides
+    @Singleton
+    ContentResolver provideContentResolver(
+            @NonNull final Context context) {
+        return context.getContentResolver();
+    }
+
+    @Provides
+    @Singleton
+    ScanAddedWorker provideScanAddedWorker(
+            @NonNull final MediaStoreUtil mediaStoreUtil,
+            @NonNull final MediaFileDao mediaFileDao) {
+        return new ScanAddedWorker(mediaFileDao, mediaStoreUtil);
+    }
+
+    @Provides
+    @Singleton
+    ScanDeletedWorker provideScanDeletedWorker(
+            @NonNull final MediaStoreUtil mediaStoreUtil,
+            @NonNull final MediaFileDao mediaFileDao) {
+        return new ScanDeletedWorker(mediaFileDao, mediaStoreUtil);
+    }
+
+    @Provides
+    @Singleton
+    MediaStoreUtil provideMediaStoreUtil(
+            @NonNull final ContentResolver contentResolver
+    ) {
+        return new MediaStoreUtil(contentResolver);
     }
 }
