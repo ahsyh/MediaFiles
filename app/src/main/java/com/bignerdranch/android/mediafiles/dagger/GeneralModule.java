@@ -48,11 +48,12 @@ public class GeneralModule {
     @Provides
     @Singleton
     Discovery provideDiscovery(
+            @NonNull final Context context,
             @NonNull final ScanAddedTask scanAddedTask,
             @NonNull final ScanDeletedTask scanDeletedTask,
             @NonNull final WorkerSchedule workerSchedule,
             @NonNull final MediaFileDao mediaFileDao) {
-        return new Discovery(mediaFileDao, scanAddedTask, scanDeletedTask, workerSchedule);
+        return new Discovery(context, mediaFileDao, scanAddedTask, scanDeletedTask, workerSchedule);
     }
 
     @Provides

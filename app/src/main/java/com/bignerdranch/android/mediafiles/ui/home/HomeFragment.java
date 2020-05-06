@@ -29,8 +29,6 @@ public class HomeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_home, container, false);
         final TextView textView = root.findViewById(R.id.text_summary);
 
-        homeViewModel.setup();
-
         final LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         layoutManager.setOrientation(RecyclerView.VERTICAL);
         final RecyclerView localItemRecyclerView = root.findViewById(R.id.mediaFilesRecyclerView);

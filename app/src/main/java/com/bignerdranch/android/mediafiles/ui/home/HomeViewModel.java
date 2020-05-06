@@ -5,7 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Transformations;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
 
@@ -26,21 +26,14 @@ public class HomeViewModel extends AndroidViewModel {
     /** Paged live data of local items. */
     @Getter private LiveData<PagedList<MediaFile>> liveMediaFiles;
 
-    private MutableLiveData<String> mText;
+    @Getter private LiveData<String> text;
 
     public HomeViewModel(@NonNull final Application application) {
             super(application);
-        mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
-    }
-
-    public void setup() {
         MediaFilesApplication.getAppComponent().inject(this);
-
         liveMediaFiles = new LivePagedListBuilder<>(mediaFileDao.getAll(), PAGE_SIZE).build();
+        LiveData<Long> countLiveData = mediaFileDao.getSummary();
+        text = Transformations.map(countLiveData, num -> num + " items found in MS");
     }
 
-    public LiveData<String> getText() {
-        return mText;
-    }
 }

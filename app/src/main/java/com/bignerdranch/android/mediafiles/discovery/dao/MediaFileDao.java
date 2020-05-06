@@ -1,5 +1,6 @@
 package com.bignerdranch.android.mediafiles.discovery.dao;
 
+import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -27,6 +28,9 @@ public abstract class MediaFileDao {
 
     @Query("SELECT COUNT ( DISTINCT path ) FROM media_file WHERE path IN (:paths)")
     public abstract int getCountOfGivenPath(String[] paths);
+
+    @Query("SELECT COUNT ( DISTINCT id ) FROM media_file")
+    public abstract LiveData<Long> getSummary();
 
     @Insert
     public abstract void insertAll(Collection<MediaFile> mediaFiles);

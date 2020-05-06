@@ -9,7 +9,7 @@ import androidx.room.RoomDatabase;
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao;
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile;
 
-@Database(entities = {MediaFile.class}, version = 1)
+@Database(entities = {MediaFile.class}, version = 1, exportSchema = false)
 public abstract class DiscoveryDatabase extends RoomDatabase {
 
     private static DiscoveryDatabase INSTANCE;
@@ -24,6 +24,7 @@ public abstract class DiscoveryDatabase extends RoomDatabase {
                         context.getApplicationContext(),
                         DiscoveryDatabase.class,
                         "discovery.db")
+                        .fallbackToDestructiveMigration()
                         .build();
             }
             return INSTANCE;

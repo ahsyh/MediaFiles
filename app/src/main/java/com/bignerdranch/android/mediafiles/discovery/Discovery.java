@@ -1,5 +1,6 @@
 package com.bignerdranch.android.mediafiles.discovery;
 
+import android.content.Context;
 import android.util.Log;
 
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao;
@@ -13,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class Discovery {
+    @NonNull private final Context context;
     @NonNull private final MediaFileDao mediaFileDao;
     @NonNull private final ScanAddedTask addedWorker;
     @NonNull private final ScanDeletedTask deletedWorker;
@@ -34,6 +36,8 @@ public class Discovery {
     private void scan() {
         addedWorker.run();
         deletedWorker.run();
+
+
     }
 
 }
