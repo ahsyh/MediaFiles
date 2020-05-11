@@ -31,9 +31,10 @@ public class HomeViewModel extends AndroidViewModel {
     public HomeViewModel(@NonNull final Application application) {
             super(application);
         MediaFilesApplication.getAppComponent().inject(this);
+
         liveMediaFiles = new LivePagedListBuilder<>(mediaFileDao.getAll(), PAGE_SIZE).build();
-        LiveData<Long> countLiveData = mediaFileDao.getSummary();
+
+        final LiveData<Long> countLiveData = mediaFileDao.getLiveCount();
         text = Transformations.map(countLiveData, num -> num + " items found in MS");
     }
-
 }

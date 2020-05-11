@@ -30,7 +30,7 @@ public abstract class MediaFileDao {
     public abstract int getCountOfGivenPath(String[] paths);
 
     @Query("SELECT COUNT ( DISTINCT id ) FROM media_file")
-    public abstract LiveData<Long> getSummary();
+    public abstract LiveData<Long> getLiveCount();
 
     @Insert
     public abstract void insertAll(Collection<MediaFile> mediaFiles);
