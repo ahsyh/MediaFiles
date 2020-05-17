@@ -4,12 +4,15 @@ package com.bignerdranch.android.mediafiles.app.permission;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.bignerdranch.android.mediafiles.discovery.Discovery;
 import com.bignerdranch.android.mediafiles.util.log.Logger;
 import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper;
 
@@ -18,28 +21,23 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * Utility class to manage runtime permissions introduced in Android Marshmallow
  */
+@RequiredArgsConstructor
 public class PermissionsManagerImpl implements PermissionsManager {
 
     private static final String TAG = PermissionsManagerImpl.class.getName();
 
     private final int REQUEST_CODE_ASK_PERMISSIONS = 123;
 
-    private final AppCompatActivity activity;
-    private final Map<String, List<PermissionCallback>> permissionRequests;
-    private final GlobalBusHelper globalBusHelper;
-    private final Logger logger;
+    @NonNull private final AppCompatActivity activity;
+    @NonNull private final Logger logger;
+    @NonNull private final GlobalBusHelper globalBusHelper;
 
-    public PermissionsManagerImpl(@NonNull final AppCompatActivity activity,
-                                  @NonNull final Logger logger,
-                                  @NonNull final GlobalBusHelper globalBusHelper) {
-        this.activity = activity;
-        this.permissionRequests = new HashMap<>();
-        this.globalBusHelper = globalBusHelper;
-        this.logger = logger;
-    }
+    @NonNull private final Map<String, List<PermissionCallback>> permissionRequests = new HashMap<>();
 
     /**
      * Allows the application to request a specific permission
@@ -70,6 +68,27 @@ public class PermissionsManagerImpl implements PermissionsManager {
 
             requestPermission(permission);
         }
+    }
+
+    @Override
+    public void requestPermission(@NonNull String permission, @Nullable Runnable operationGranted, @Nullable Runnable operationDenied) {
+        PermissionCallback callback = new PermissionCallback() {
+            public void onPermissionGranted(boolean b) {
+                Log.v("ShiyihuiHLNSKQ", "get permission, start sync");
+                if (operationGranted != null) {
+                    operationGranted.run();
+                }
+            }
+
+            public void onPermissionDenied(boolean b) {
+                Log.v("ShiyihuiHLNSKQ", "deny permission");
+                if (operationDenied != null) {
+                    operationDenied.run();
+                }
+            }
+        };
+
+        requestPermission(permission, callback);
     }
 
     /**

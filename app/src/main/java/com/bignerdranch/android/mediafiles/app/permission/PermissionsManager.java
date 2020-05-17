@@ -1,6 +1,7 @@
 package com.bignerdranch.android.mediafiles.app.permission;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 /**
@@ -17,6 +18,8 @@ public interface PermissionsManager {
      *                           granted or denied
      */
     void requestPermission(@NonNull String permission, @NonNull PermissionCallback permissionCallback);
+
+    void requestPermission(@NonNull String permission, @Nullable Runnable operationGranted, @Nullable Runnable operationDenied);
 
     /**
      * Called when the activity receives an {@link AppCompatActivity#onRequestPermissionsResult(int, String[], int[])}

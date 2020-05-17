@@ -28,18 +28,7 @@ public class MainActivity extends BeanAwareActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //requestPermission();
-        permissionsManager.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE, new PermissionCallback(){
-            public void onPermissionGranted(boolean b) {
-                Log.v("ShiyihuiHLNSKQ", "get permission, start sync");
-                discovery.get().initAsync();
-            }
-
-            public void onPermissionDenied(boolean b) {
-                Log.v("ShiyihuiHLNSKQ", "deny permission");
-            }
-
-        });
+        requestPermission();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -54,6 +43,11 @@ public class MainActivity extends BeanAwareActivity {
 
     protected void injectThis(@NonNull ActivityComponent component) {
         component.inject(this);
+    }
+
+    private void requestPermission() {
+        permissionsManager.requestPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                () -> discovery.get().initAsync(), null);
     }
 
     @Override
