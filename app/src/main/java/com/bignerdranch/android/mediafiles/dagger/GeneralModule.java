@@ -12,6 +12,11 @@ import com.bignerdranch.android.mediafiles.discovery.worker.MediaStoreUtil;
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask;
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask;
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule;
+import com.bignerdranch.android.mediafiles.util.log.AndroidLogger;
+import com.bignerdranch.android.mediafiles.util.log.DefaultLogObfuscator;
+import com.bignerdranch.android.mediafiles.util.log.LogObfuscator;
+import com.bignerdranch.android.mediafiles.util.log.Logger;
+import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper;
 
 import javax.inject.Singleton;
 
@@ -29,6 +34,24 @@ public class GeneralModule {
     @Singleton
     Context provideContext() {
         return context;
+    }
+
+    @Provides
+    @Singleton
+    LogObfuscator provideLogObfuscator() {
+        return new DefaultLogObfuscator();
+    }
+
+    @Provides
+    @Singleton
+    Logger provideLogger(@NonNull final LogObfuscator logObfuscator) {
+        return new AndroidLogger("SYH", logObfuscator);
+    }
+
+    @Provides
+    @Singleton
+    GlobalBusHelper provideGlobalBusHelper() {
+        return GlobalBusHelper.getInstance();
     }
 
     @Provides
