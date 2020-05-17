@@ -1,10 +1,12 @@
 package com.bignerdranch.android.mediafiles
 
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.util.Log
 import androidx.multidex.MultiDexApplication
 import com.bignerdranch.android.mediafiles.dagger.DaggerGeneralComponent
 import com.bignerdranch.android.mediafiles.dagger.GeneralComponent
 import com.bignerdranch.android.mediafiles.dagger.GeneralModule
-import com.bignerdranch.android.mediafiles.StethoHelper
+import com.bignerdranch.android.mediafiles.app.permission.PermissionsManagerImpl
 import com.bignerdranch.android.mediafiles.discovery.Discovery
 import javax.inject.Inject
 import javax.inject.Provider
@@ -27,7 +29,13 @@ class MediaFilesApplication : MultiDexApplication() {
 
     private fun init() {
         StethoHelper.init(this)
-        discovery.get().initAsync()
+
+        if (PermissionsManagerImpl.hasPermission(this, WRITE_EXTERNAL_STORAGE)) {
+            Log.v("ShiyihuiHLNSKQ", "has permission already, start sync");
+            discovery.get().initAsync();
+        } else {
+            Log.v("ShiyihuiHLNSKQ", "has no permission, skip sync now");
+        }
     }
 
     companion object {
