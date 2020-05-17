@@ -1,6 +1,5 @@
 package com.bignerdranch.android.mediafiles.app.permission;
 
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -12,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
-import com.bignerdranch.android.mediafiles.discovery.Discovery;
 import com.bignerdranch.android.mediafiles.util.log.Logger;
 import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper;
 

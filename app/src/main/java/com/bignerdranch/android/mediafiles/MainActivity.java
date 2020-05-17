@@ -2,9 +2,7 @@ package com.bignerdranch.android.mediafiles;
 
 import android.Manifest;
 import android.os.Bundle;
-import android.util.Log;
 
-import com.bignerdranch.android.mediafiles.app.permission.PermissionCallback;
 import com.bignerdranch.android.mediafiles.app.permission.PermissionsManager;
 import com.bignerdranch.android.mediafiles.dagger.ActivityComponent;
 import com.bignerdranch.android.mediafiles.discovery.Discovery;
