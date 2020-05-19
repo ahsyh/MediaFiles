@@ -9,7 +9,7 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile;
-import com.bumptech.glide.Glide;
+import com.bignerdranch.android.mediafiles.util.coil.ImageLoadUtilKt;
 
 public class MediaFileImageAdapter extends PagedListAdapter<MediaFile, MediaFileImageViewHolder> {
     private static final String TAG = "LocalItemAdapter";
@@ -49,7 +49,8 @@ public class MediaFileImageAdapter extends PagedListAdapter<MediaFile, MediaFile
         if (item.getPath() != null) {
             path = item.getPath();
             holder.textView.setText("image");
-            Glide.with(holder.context).load(path).into(holder.imageView);
+//            Glide.with(holder.context).load(path).into(holder.imageView);
+            ImageLoadUtilKt.loadImage(holder.imageView, path);
         } else {
             Log.v("ShiyihuiHLNSKQ", "Load file path null.");
         }
