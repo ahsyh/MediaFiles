@@ -1,6 +1,5 @@
 package com.bignerdranch.android.mediafiles.ui.dashboard;
 
-import android.Manifest;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;

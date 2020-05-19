@@ -8,7 +8,6 @@ import androidx.lifecycle.Lifecycle;
 import com.bignerdranch.android.mediafiles.app.permission.PermissionsManager;
 import com.bignerdranch.android.mediafiles.app.permission.PermissionsManagerImpl;
 import com.bignerdranch.android.mediafiles.dagger.scope.PerActivity;
-import com.bignerdranch.android.mediafiles.discovery.Discovery;
 import com.bignerdranch.android.mediafiles.util.log.Logger;
 import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper;
 

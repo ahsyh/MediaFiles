@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile;
 import com.bumptech.glide.Glide;
 
-import java.io.File;
-
 public class MediaFileImageAdapter extends PagedListAdapter<MediaFile, MediaFileImageViewHolder> {
     private static final String TAG = "LocalItemAdapter";
 

@@ -1,6 +1,5 @@
 package com.bignerdranch.android.mediafiles.util.message;
 
-
 import androidx.annotation.NonNull;
 
 import com.bignerdranch.android.mediafiles.MediaFilesApplication;

@@ -1,6 +1,5 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
