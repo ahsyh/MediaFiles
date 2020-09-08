@@ -72,14 +72,14 @@ public class PermissionsManagerImpl implements PermissionsManager {
     public void requestPermission(@NonNull String permission, @Nullable Runnable operationGranted, @Nullable Runnable operationDenied) {
         PermissionCallback callback = new PermissionCallback() {
             public void onPermissionGranted(boolean b) {
-                Log.v("ShiyihuiHLNSKQ", "get permission, start sync");
+                Log.v("==YIHUI==", "get permission, start sync");
                 if (operationGranted != null) {
                     operationGranted.run();
                 }
             }
 
             public void onPermissionDenied(boolean b) {
-                Log.v("ShiyihuiHLNSKQ", "deny permission");
+                Log.v("==YIHUI==", "deny permission");
                 if (operationDenied != null) {
                     operationDenied.run();
                 }

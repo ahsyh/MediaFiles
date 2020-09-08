@@ -29,7 +29,7 @@ public class MediaChangeWorker extends Worker {
     @Override
     public Result doWork()
     {
-        Log.v("ShiyihuiHLNSKQ", "MediaChangeWorker doWork()");
+        Log.v("==YIHUI==", "MediaChangeWorker doWork()");
         scanAddedTask.run();
         scanDeletedTask.run();
 

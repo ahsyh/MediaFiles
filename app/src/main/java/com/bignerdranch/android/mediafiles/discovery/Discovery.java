@@ -25,19 +25,16 @@ public class Discovery {
     }
 
     synchronized private void init() {
-        Log.v("ShiyihuiHLNSKQ", "Prework, total " + mediaFileDao.getCount()
+        Log.v("==YIHUI==", "Prework, total " + mediaFileDao.getCount()
                 + " items, ");
         workerSchedule.setupMediaStoreChangeWorker();
         scan();
-        Log.v("ShiyihuiHLNSKQ", "Summrizy, total " + mediaFileDao.getCount()
+        Log.v("==YIHUI==", "Summrizy, total " + mediaFileDao.getCount()
                 + " items, ");
     }
 
     private void scan() {
         addedWorker.run();
         deletedWorker.run();
-
-
     }
-
 }

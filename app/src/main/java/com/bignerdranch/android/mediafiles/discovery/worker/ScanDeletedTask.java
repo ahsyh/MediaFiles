@@ -17,7 +17,7 @@ public class ScanDeletedTask {
     @NonNull private final MediaStoreUtil mediaStoreUtil;
 
     public void run() {
-        Log.v("ShiyihuiHLNSKQ" , "ScanDeletedWorker started");
+        Log.v("==YIHUI==" , "ScanDeletedWorker started");
         long pos = 0L;
         int pageSize = 200;
         boolean stopped = false;
@@ -26,13 +26,13 @@ public class ScanDeletedTask {
             if (files.size() <= 0) break;
             for (MediaFile it : files) {
                 if (!mediaStoreUtil.isPathExist(MediaType.PHOTO, it.path)) {
-                    Log.v("ShiyihuiHLNSKQ", "remove item: " + it.path);
+                    Log.v("==YIHUI==", "remove item: " + it.path);
                     mediaFileDao.delete(it);
                 }
                 pos = it.id;
             }
         } while (!stopped);
-        Log.v("ShiyihuiHLNSKQ" , "ScanDeletedWorker finish");
+        Log.v("==YIHUI==" , "ScanDeletedWorker finish");
     }
 
 }

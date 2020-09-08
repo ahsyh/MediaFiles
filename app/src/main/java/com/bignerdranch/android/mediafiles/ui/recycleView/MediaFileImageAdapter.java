@@ -9,7 +9,6 @@ import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile;
-import com.bignerdranch.android.mediafiles.util.coil.ImageLoadUtilKt;
 import com.bumptech.glide.Glide;
 
 public class MediaFileImageAdapter extends PagedListAdapter<MediaFile, MediaFileImageViewHolder> {
@@ -53,12 +52,14 @@ public class MediaFileImageAdapter extends PagedListAdapter<MediaFile, MediaFile
             try {
                 Glide.with(holder.imageView.getContext()).load("file://" + path).into(holder.imageView);
             } catch (Exception e) {
-                Log.e("ShiyihuiHLNSKQ", "load image failed", e);
+                Log.e("==YIHUI==", "load image failed", e);
             }
 //            ImageLoadUtilKt.loadImage(holder.imageView, path);
-            Log.v("ShiyihuiHLNSKQ", "Load file path " + path);
+
+            Log.v("==YIHUI==", "Load file path " + path);
         } else {
-            Log.v("ShiyihuiHLNSKQ", "Load file path null.");
+            Log.v("==YIHUI==", "Load file path null.");
         }
     }
 }
+

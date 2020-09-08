@@ -61,7 +61,7 @@ public class DashboardFragment extends Fragment {
         float imageWidth = getResources().getDimension(R.dimen.item_image_width);
 
         int result = (int)(width/imageWidth);
-        Log.v("ShiyihuiHLNSKQ","value: " + width + " " + height + " " + density + " " + densityDpi + " " + result);
+        Log.v("==YIHUI==","value: " + width + " " + height + " " + density + " " + densityDpi + " " + result);
         return result;
     }
 }

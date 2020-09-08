@@ -39,7 +39,7 @@ public class MediaStoreUtil {
 //            count = cursor.getLong(colIndex);
             count = cursor.getCount();
         } catch (Exception e) {
-            Log.v("ShiyihuiHLNSKQ", "problem in isPathExist:" + e.getMessage());
+            Log.v("==YIHUI==", "problem in isPathExist:" + e.getMessage());
         }
         return count > 0L;
     }
@@ -64,7 +64,7 @@ public class MediaStoreUtil {
         String[] parameters = {
                 "" + offset };
 
-        Log.v("ShiyihuiHLNSKQ", "in fetchMediaFiles try to fetch " + limit + " items begin from " + offset);
+        Log.v("==YIHUI==", "in fetchMediaFiles try to fetch " + limit + " items begin from " + offset);
 
         try (final Cursor cursor = contentResolver.query(
                 MediaUri.getUri(mediaType), selectors, MediaStore.MediaColumns._ID + " > ?",
@@ -73,7 +73,7 @@ public class MediaStoreUtil {
                 result.add(itemFromCursor(cursor));
             }
         } catch (Exception e) {
-            Log.v("ShiyihuiHLNSKQ", "problem in fetchMediaFiles:" + e.getMessage());
+            Log.v("==YIHUI==", "problem in fetchMediaFiles:" + e.getMessage());
         }
 
         return  result;

@@ -18,7 +18,7 @@ public class ScanAddedTask {
     @NonNull private final MediaStoreUtil mediaStoreUtil;
 
     public void run() {
-        Log.v("ShiyihuiHLNSKQ" , "ScanAddedWorker start");
+        Log.v("==YIHUI==" , "ScanAddedWorker start");
 
         long offset = 0;
         final int pageSize = 100;
@@ -34,7 +34,7 @@ public class ScanAddedTask {
             offset = files.get(size - 1).mediaStoreId;
         }
 
-        Log.v("ShiyihuiHLNSKQ" , "ScanAddedWorker finished");
+        Log.v("==YIHUI==" , "ScanAddedWorker finished");
     }
 
     private void batchHandler(@NonNull final List<MediaFile> items) {
@@ -42,7 +42,7 @@ public class ScanAddedTask {
         for (MediaFile item : items) {
             String[] paths = {item.path};
             if (mediaFileDao.getCountOfGivenPath(paths) <= 0) {
-                Log.v("ShiyihuiHLNSKQ", "insert path: " + item.path);
+                Log.v("==YIHUI==", "insert path: " + item.path);
                 newItems.add(item);
             }
         }
