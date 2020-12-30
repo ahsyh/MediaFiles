@@ -7,6 +7,7 @@ import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule
 import com.bignerdranch.android.mediafiles.util.AsyncUtil
+import io.reactivex.functions.Action
 import lombok.RequiredArgsConstructor
 
 @RequiredArgsConstructor

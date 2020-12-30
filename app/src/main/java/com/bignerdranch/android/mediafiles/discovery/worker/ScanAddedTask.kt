@@ -1,6 +1,8 @@
 package com.bignerdranch.android.mediafiles.discovery.worker
 
+import android.os.Build
 import android.util.Log
+import androidx.annotation.RequiresApi
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.discovery.model.MediaType
@@ -10,6 +12,7 @@ import java.util.*
 @RequiredArgsConstructor
 class ScanAddedTask (val mediaFileDao: MediaFileDao, val mediaStoreUtil: MediaStoreUtil) {
 
+    @RequiresApi(Build.VERSION_CODES.O)
     fun run() {
         Log.v("ShiyihuiHLNSKQ", "ScanAddedWorker start")
         var offset: Long = 0
