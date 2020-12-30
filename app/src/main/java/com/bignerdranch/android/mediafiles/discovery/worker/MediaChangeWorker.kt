@@ -24,6 +24,6 @@ class MediaChangeWorker(context: Context, workerParams: WorkerParameters) : Work
     }
 
     init {
-        MediaFilesApplication.getAppComponent().inject(this)
+        MediaFilesApplication.appComponent.inject(this)
     }
 }

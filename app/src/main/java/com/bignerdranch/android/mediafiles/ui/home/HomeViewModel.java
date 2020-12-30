@@ -24,13 +24,12 @@ public class HomeViewModel extends AndroidViewModel {
     private static final int PAGE_SIZE = 200;
 
     /** Paged live data of local items. */
-    @Getter private LiveData<PagedList<MediaFile>> liveMediaFiles;
-
-    @Getter private LiveData<String> text;
+    LiveData<PagedList<MediaFile>> liveMediaFiles;
+    LiveData<String> text;
 
     public HomeViewModel(@NonNull final Application application) {
             super(application);
-        MediaFilesApplication.getAppComponent().inject(this);
+        MediaFilesApplication.appComponent.inject(this);
 
         liveMediaFiles = new LivePagedListBuilder<>(mediaFileDao.getAll(), PAGE_SIZE).build();
 

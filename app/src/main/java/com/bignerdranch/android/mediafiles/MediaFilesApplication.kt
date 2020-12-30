@@ -10,8 +10,8 @@ import javax.inject.Inject
 import javax.inject.Provider
 
 class MediaFilesApplication : MultiDexApplication() {
-    @Inject
-    protected var discovery: Provider<Discovery>? = null
+    @Inject lateinit var discovery: Provider<Discovery>
+
     override fun onCreate() {
         super.onCreate()
         initDagger()
@@ -22,16 +22,15 @@ class MediaFilesApplication : MultiDexApplication() {
         appComponent = DaggerGeneralComponent.builder()
                 .generalModule(GeneralModule(this))
                 .build()
-        appComponent!!.inject(this)
+        appComponent.inject(this)
     }
 
     private fun init() {
         StethoHelper.init(this)
-        discovery!!.get().initAsync()
+        discovery.get().initAsync()
     }
 
     companion object {
-        var appComponent: GeneralComponent? = null
-            protected set
+        lateinit var appComponent: GeneralComponent
     }
 }

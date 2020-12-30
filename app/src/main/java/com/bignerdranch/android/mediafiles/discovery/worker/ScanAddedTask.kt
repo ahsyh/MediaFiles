@@ -26,7 +26,7 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao, val mediaStoreUtil: MediaSt
     }
 
     private fun batchHandler(items: List<MediaFile>) {
-        val newItems: MutableList<MediaFile?> = ArrayList(items.size)
+        val newItems: MutableList<MediaFile> = ArrayList(items.size)
         for (item in items) {
             val paths = arrayOf(item.path)
             if (mediaFileDao.getCountOfGivenPath(paths) <= 0) {

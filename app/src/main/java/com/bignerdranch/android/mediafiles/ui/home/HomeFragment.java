@@ -36,8 +36,8 @@ public class HomeFragment extends Fragment {
         adapter = new MediaFileAdapter();
         localItemRecyclerView.setAdapter(adapter);
 
-        homeViewModel.getLiveMediaFiles().observe(getViewLifecycleOwner(), adapter::submitList);
-        homeViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
+        homeViewModel.liveMediaFiles.observe(getViewLifecycleOwner(), adapter::submitList);
+        homeViewModel.text.observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
