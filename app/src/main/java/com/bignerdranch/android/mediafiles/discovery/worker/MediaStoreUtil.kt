@@ -2,6 +2,7 @@ package com.bignerdranch.android.mediafiles.discovery.worker
 
 import android.content.ContentResolver
 import android.database.Cursor
+import android.net.Uri
 import android.provider.MediaStore
 import android.util.Log
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
@@ -41,24 +42,27 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
             limit: Int
     ): List<MediaFile> {
         val result: MutableList<MediaFile> = ArrayList(limit)
-        if (getUri(mediaType) == null) {
-            return result
-        }
+        val uri: Uri = getUri(mediaType) ?: return result
+
         val selectors = arrayOf(
                 MediaStore.MediaColumns._ID,
                 MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.DATE_ADDED,
                 MediaStore.Images.Media.SIZE)
-        val parameters = arrayOf(
-                "" + offset)
+        val parameters = arrayOf("" + offset)
         Log.v("ShiyihuiHLNSKQ", "in fetchMediaFiles try to fetch $limit items begin from $offset")
         try {
+            val sortOrderStr = MediaStore.MediaColumns._ID  + " ASC" + if (limit > 0) " LIMIT $limit" else ""
+            val selection = MediaStore.MediaColumns._ID + " > ?"
+            Log.v("ShiyihuiHLNSKQ", "query string, uri: ${uri.toString()}, selection: $selection, sortOrder: $sortOrderStr")
             contentResolver.query(
-                    getUri(mediaType)!!, selectors, MediaStore.MediaColumns._ID + " > ?",
-                    parameters, MediaStore.MediaColumns._ID + " ASC" + if (limit > 0) " LIMIT $limit" else "").use { cursor ->
-                cursor!!.moveToFirst()
+                    uri, selectors, selection, parameters, sortOrderStr)?.use { cursor ->
+                cursor.moveToFirst()
+                Log.v("ShiyihuiHLNSKQ", "moveToFirst")
                 while (!cursor.isAfterLast) {
-                    result.add(itemFromCursor(cursor))
+                    val item = itemFromCursor(cursor)
+                    Log.v("ShiyihuiHLNSKQ", "get item: ${item.path}")
+                    result.add(item)
                     cursor.moveToNext()
                 }
             }

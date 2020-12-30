@@ -14,9 +14,9 @@ class ScanDeletedTask (val mediaFileDao: MediaFileDao, val mediaStoreUtil: Media
         val stopped = false
         do {
             val files = mediaFileDao.getFilesAfterId(pos, pageSize.toLong())
-            if (files!!.size <= 0) break
+            if (files.size <= 0) break
             for (it in files) {
-                if (!mediaStoreUtil.isPathExist(MediaType.PHOTO, it!!.path!!)) {
+                if (!mediaStoreUtil.isPathExist(MediaType.PHOTO, it.path!!)) {
                     Log.v("ShiyihuiHLNSKQ", "remove item: " + it.path)
                     mediaFileDao.delete(it)
                 }
