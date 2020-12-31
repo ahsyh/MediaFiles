@@ -76,8 +76,7 @@ class GeneralModule(val context: Context) {
     @Provides
     @Singleton
     fun provideMediaStoreUtil(
-            contentResolver: ContentResolver
-    ): MediaStoreUtil {
+            contentResolver: ContentResolver): MediaStoreUtil {
         return MediaStoreUtil(contentResolver)
     }
 

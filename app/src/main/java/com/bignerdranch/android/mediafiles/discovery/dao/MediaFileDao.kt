@@ -17,7 +17,7 @@ abstract class MediaFileDao {
     abstract fun loadAllByIds(ids: IntArray): List<MediaFile>
 
     @Query("SELECT * FROM media_file WHERE id > :id ORDER BY id ASC LIMIT :limit")
-    abstract fun getFilesAfterId(id: Long, limit: Long): List<MediaFile>
+    abstract fun getFilesAfterId(id: Long, limit: Int): List<MediaFile>
 
     @get:Query("SELECT COUNT ( DISTINCT id ) FROM media_file")
     abstract val count: Int

@@ -32,6 +32,20 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:text="@string/unified_id_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/default_label_margin_end"
+                    android:gravity="start"/>
+
+                <TextView
+                    android:id="@+id/unifiedId"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                    android:gravity="start"/>
+
+                <TextView
                     android:text="@string/path_label"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -51,20 +65,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/item_list_row_height"
                 android:orientation="horizontal">
-
-                <TextView
-                    android:text="@string/unified_id_label"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/default_label_margin_end"
-                    android:gravity="start"/>
-
-                <TextView
-                    android:id="@+id/unifiedId"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                    android:gravity="start"/>
 
                 <TextView
                     android:text="@string/added_label"

@@ -19,15 +19,17 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
     fun isPathExist(
             mediaType: MediaType,
             path: String): Boolean {
+        val uri: Uri = getUri(mediaType) ?: return false
+
         var count: Long = 0
 //        String colName = "count";
 //        String proj = "count(" + MediaStore.MediaColumns.DATA + ") AS " + colName;
         val proj = MediaStore.MediaColumns._ID
         try {
             contentResolver.query(
-                    getUri(mediaType)!!, arrayOf(proj),
-                    MediaStore.MediaColumns.DATA + " = ?", arrayOf(path), null).use { cursor ->
-                cursor!!.moveToNext()
+                    uri, arrayOf(proj),
+                    MediaStore.MediaColumns.DATA + " = ?", arrayOf(path), null)?.use { cursor ->
+                //            cursor.moveToNext()
                 //            int colIndex = cursor.getColumnIndexOrThrow(colName);
                 //            count = cursor.getLong(colIndex);
                 count = cursor.count.toLong()
@@ -50,6 +52,7 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
                 MediaStore.MediaColumns._ID,
                 MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.DATE_ADDED,
+                MediaStore.Images.Media.DATE_TAKEN,
                 MediaStore.Images.Media.SIZE)
         val parameters = arrayOf("" + offset)
         Log.v("ShiyihuiHLNSKQ", "in fetchMediaFiles try to fetch $limit items begin from $offset")
@@ -79,11 +82,13 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
         val idCol = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns._ID)
         val dataCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         val dateAddedCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED)
+        val dateTakenCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN)
         val sizeCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)
         val item = MediaFile()
         item.mediaStoreId = cursor.getLong(idCol)
         item.path = cursor.getString(dataCol)
         item.dateAdded = cursor.getLong(dateAddedCol)
+        item.dateTaken = cursor.getLong(dateTakenCol)
         item.size = cursor.getLong(sizeCol)
         return item
     }

@@ -13,7 +13,7 @@ class ScanDeletedTask (val mediaFileDao: MediaFileDao, val mediaStoreUtil: Media
         val pageSize = 200
         val stopped = false
         do {
-            val files = mediaFileDao.getFilesAfterId(pos, pageSize.toLong())
+            val files = mediaFileDao.getFilesAfterId(pos, pageSize)
             if (files.size <= 0) break
             for (it in files) {
                 if (!mediaStoreUtil.isPathExist(MediaType.PHOTO, it.path!!)) {

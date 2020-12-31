@@ -14,7 +14,7 @@ object AsyncUtil {
                         .observeOn(Schedulers.io())
                         .subscribe(
                                 { compositeDisposable.dispose() }
-                        ) { throwable: Throwable -> compositeDisposable.dispose() }
+                        ) { compositeDisposable.dispose() }
         )
     }
 }
