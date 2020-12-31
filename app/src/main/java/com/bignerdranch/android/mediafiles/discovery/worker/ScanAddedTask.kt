@@ -12,7 +12,6 @@ import java.util.*
 @RequiredArgsConstructor
 class ScanAddedTask (val mediaFileDao: MediaFileDao, val mediaStoreUtil: MediaStoreUtil) {
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun run() {
         Log.v("ShiyihuiHLNSKQ", "ScanAddedWorker start")
         var offset: Long = 0

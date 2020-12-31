@@ -38,14 +38,11 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
         return count > 0L
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     fun fetchMediaFiles(
             mediaType: MediaType,
             offset: Long,
             limit: Int
     ): List<MediaFile> {
-        testMethod()
-
         val result: MutableList<MediaFile> = ArrayList(limit)
         val uri: Uri = getUri(mediaType) ?: return result
 
@@ -76,27 +73,6 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
             Log.v("ShiyihuiHLNSKQ", "problem in fetchMediaFiles:" + e.message)
         }
         return result
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun testMethod() {
-        val columns = arrayOf(MediaStore.Images.Media._ID)
-
-        Log.e("ShiyihuiHLNSKQ", "test method, started ", RuntimeException("debug"))
-
-        contentResolver.query(
-                MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns,
-                null, null, null
-        )?.use { cursor ->
-            Log.v("ShiyihuiHLNSKQ", "test method, query succeed, get ${cursor.count} item")
-            val idColumn = cursor.getColumnIndex(MediaStore.Images.Media._ID)
-
-            while (cursor.moveToNext()) {
-                val id = cursor.getLong(idColumn)
-                Log.v("ShiyihuiHLNSKQ", "test method, get one, id: $id,")
-            }
-        }
-        Log.v("ShiyihuiHLNSKQ", "test method, end")
     }
 
     private fun itemFromCursor(cursor: Cursor): MediaFile {
