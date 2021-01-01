@@ -4,7 +4,7 @@ import androidx.multidex.MultiDexApplication
 import com.bignerdranch.android.mediafiles.dagger.DaggerGeneralComponent
 import com.bignerdranch.android.mediafiles.dagger.GeneralComponent
 import com.bignerdranch.android.mediafiles.dagger.GeneralModule
-import com.bignerdranch.android.mediafiles.debug.StethoHelper
+import com.bignerdranch.android.mediafiles.StethoHelper
 import com.bignerdranch.android.mediafiles.discovery.Discovery
 import javax.inject.Inject
 import javax.inject.Provider
