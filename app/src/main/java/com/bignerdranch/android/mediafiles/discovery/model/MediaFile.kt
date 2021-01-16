@@ -25,5 +25,8 @@ class MediaFile {
 
     @ColumnInfo(name = "date_taken")
     var dateTaken: Long = 0 // Getters and setters are ignored for brevity,
+
+    @ColumnInfo(name = "date_modify")
+    var dateModify: Long = 0 // Getters and setters are ignored for brevity,
     // but they're required for Room to work.
 }

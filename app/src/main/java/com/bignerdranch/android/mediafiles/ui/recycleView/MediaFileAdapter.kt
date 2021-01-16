@@ -33,7 +33,7 @@ class MediaFileAdapter : PagedListAdapter<MediaFile, MediaFileViewHolder>(object
         holder.unifiedIdView.text = item.mediaStoreId.toString()
         holder.addedView.text = timeToDate(1000 * item.dateAdded)
         holder.takenView.text = timeToDate(item.dateTaken)
-        holder.modifiedView.text = item.size.toString()
+        holder.modifiedView.text = timeToDate(1000 * item.dateModify)
     }
 
     private fun timeToDate(time: Long): String {

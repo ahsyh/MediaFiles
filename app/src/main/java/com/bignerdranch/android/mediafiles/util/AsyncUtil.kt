@@ -13,8 +13,9 @@ object AsyncUtil {
                         .subscribeOn(Schedulers.io())
                         .observeOn(Schedulers.io())
                         .subscribe(
+                                { compositeDisposable.dispose() },
                                 { compositeDisposable.dispose() }
-                        ) { compositeDisposable.dispose() }
+                        )
         )
     }
 }

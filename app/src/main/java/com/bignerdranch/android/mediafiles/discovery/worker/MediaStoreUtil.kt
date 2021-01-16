@@ -53,6 +53,7 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
                 MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.DATE_ADDED,
                 MediaStore.Images.Media.DATE_TAKEN,
+                MediaStore.Images.Media.DATE_MODIFIED,
                 MediaStore.Images.Media.SIZE)
         val parameters = arrayOf("" + offset)
         Log.v("ShiyihuiHLNSKQ", "in fetchMediaFiles try to fetch $limit items begin from $offset")
@@ -67,7 +68,9 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
                 Log.v("ShiyihuiHLNSKQ", "query get ${cursor.count} photos. moveToFirst")
                 while (!cursor.isAfterLast) {
                     val item = itemFromCursor(cursor)
-                    Log.v("ShiyihuiHLNSKQ", "get item: ${item.path}")
+                    item?.let {
+                        Log.v("ShiyihuiHLNSKQ", "get item: ${it.path}, ${it.dateAdded}, ${it.dateTaken}, ${it.dateModify}")
+                    }
                     result.add(item)
                     cursor.moveToNext()
                 }
@@ -83,12 +86,14 @@ class MediaStoreUtil (val contentResolver: ContentResolver) {
         val dataCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA)
         val dateAddedCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_ADDED)
         val dateTakenCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_TAKEN)
+        val dateModifyCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATE_MODIFIED)
         val sizeCol = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.SIZE)
         val item = MediaFile()
         item.mediaStoreId = cursor.getLong(idCol)
         item.path = cursor.getString(dataCol)
         item.dateAdded = cursor.getLong(dateAddedCol)
         item.dateTaken = cursor.getLong(dateTakenCol)
+        item.dateModify = cursor.getLong(dateModifyCol)
         item.size = cursor.getLong(sizeCol)
         return item
     }
