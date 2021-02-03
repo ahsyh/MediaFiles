@@ -10,14 +10,38 @@ import com.bignerdranch.android.mediafiles.discovery.worker.MediaStoreUtil
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule
+import com.bignerdranch.android.mediafiles.util.log.DefaultLogObfuscator
+import com.bignerdranch.android.mediafiles.util.log.LogObfuscator
+import com.bignerdranch.android.mediafiles.util.log.Logger
+import com.bignerdranch.android.mediafiles.util.log.AndroidLogger
+import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper
 import dagger.Module
 import dagger.Provides
+import lombok.NonNull
 import lombok.RequiredArgsConstructor
 import javax.inject.Singleton
 
 @RequiredArgsConstructor
 @Module
 class GeneralModule(val context: Context) {
+
+    @Provides
+    @Singleton
+    fun provideLogObfuscator(): LogObfuscator {
+        return DefaultLogObfuscator();
+    }
+
+    @Provides
+    @Singleton
+    fun provideLogger(@NonNull logObfuscator: LogObfuscator): Logger {
+        return AndroidLogger("SYH", logObfuscator);
+    }
+
+    @Provides
+    @Singleton
+    fun provideGlobalBusHelper(): GlobalBusHelper {
+        return GlobalBusHelper.getInstance();
+    }
 
     @Provides
     @Singleton

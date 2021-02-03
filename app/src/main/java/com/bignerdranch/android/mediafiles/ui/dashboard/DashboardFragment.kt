@@ -1,5 +1,7 @@
 package com.bignerdranch.android.mediafiles.ui.dashboard
 
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -23,7 +25,8 @@ class DashboardFragment : Fragment() {
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         dashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
-        val layoutManager = GridLayoutManager(context, 3)
+//        val layoutManager = GridLayoutManager(context, 3)
+        val layoutManager = GridLayoutManager(context, spanCountForLayoutMan)
         layoutManager.orientation = RecyclerView.VERTICAL
         val localItemRecyclerView: RecyclerView = root.findViewById(R.id.mediaFilesImageRecyclerView)
         localItemRecyclerView.layoutManager = layoutManager
@@ -34,4 +37,23 @@ class DashboardFragment : Fragment() {
         dashboardViewModel.liveMediaFiles.observe(viewLifecycleOwner, Observer<PagedList<MediaFile>> { pagedList: PagedList<MediaFile> -> adapter.submitList(pagedList) })
         return root
     }
+
+    private val spanCountForLayoutMan: Int
+        get() {
+            val metric = DisplayMetrics()
+            var result = 3
+
+            activity?.let {
+                it.windowManager.defaultDisplay.getMetrics(metric)
+                val width = metric.widthPixels
+                val height = metric.heightPixels
+                val density = metric.density
+                val densityDpi = metric.densityDpi
+                val imageWidth = resources.getDimension(R.dimen.item_image_width)
+                result = (width / imageWidth).toInt()
+                Log.v("ShiyihuiHLNSKQ", "value: $width $height $density $densityDpi $result")
+            }
+
+            return result
+        }
 }
