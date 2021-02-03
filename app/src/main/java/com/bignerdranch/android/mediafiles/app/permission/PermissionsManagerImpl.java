@@ -4,8 +4,10 @@ package com.bignerdranch.android.mediafiles.app.permission;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -137,6 +139,27 @@ public class PermissionsManagerImpl implements PermissionsManager {
     public static boolean hasPermission(Context context, String permission) {
         int permissionAvailability = ContextCompat.checkSelfPermission(context, permission);
         return permissionAvailability == PackageManager.PERMISSION_GRANTED;
+    }
+
+    @Override
+    public void requestPermission(@NonNull String permission, @Nullable Runnable operationGranted, @Nullable Runnable operationDenied) {
+        PermissionCallback callback = new PermissionCallback() {
+            public void onPermissionGranted(boolean b) {
+                Log.v("ShiyihuiHLNSKQ", "get permission, start sync");
+                if (operationGranted != null) {
+                    operationGranted.run();
+                }
+            }
+
+            public void onPermissionDenied(boolean b) {
+                Log.v("ShiyihuiHLNSKQ", "deny permission");
+                if (operationDenied != null) {
+                    operationDenied.run();
+                }
+            }
+        };
+
+        requestPermission(permission, callback);
     }
 
     private void requestPermission(String permission) {
