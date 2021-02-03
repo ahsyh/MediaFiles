@@ -70,8 +70,9 @@ class GeneralModule(val context: Context) {
             scanAddedTask: ScanAddedTask,
             scanDeletedTask: ScanDeletedTask,
             workerSchedule: WorkerSchedule,
-            mediaFileDao: MediaFileDao): Discovery {
-        return Discovery(context, mediaFileDao, scanAddedTask, scanDeletedTask, workerSchedule)
+            mediaFileDao: MediaFileDao,
+            logger: Logger): Discovery {
+        return Discovery(context, mediaFileDao, scanAddedTask, scanDeletedTask, workerSchedule, logger)
     }
 
     @Provides
@@ -93,15 +94,17 @@ class GeneralModule(val context: Context) {
     @Singleton
     fun provideScanDeletedWorker(
             mediaStoreUtil: MediaStoreUtil,
-            mediaFileDao: MediaFileDao): ScanDeletedTask {
-        return ScanDeletedTask(mediaFileDao, mediaStoreUtil)
+            mediaFileDao: MediaFileDao,
+            logger: Logger): ScanDeletedTask {
+        return ScanDeletedTask(mediaFileDao, mediaStoreUtil, logger)
     }
 
     @Provides
     @Singleton
     fun provideMediaStoreUtil(
-            contentResolver: ContentResolver): MediaStoreUtil {
-        return MediaStoreUtil(contentResolver)
+            contentResolver: ContentResolver,
+            logger: Logger): MediaStoreUtil {
+        return MediaStoreUtil(contentResolver, logger)
     }
 
     @Provides

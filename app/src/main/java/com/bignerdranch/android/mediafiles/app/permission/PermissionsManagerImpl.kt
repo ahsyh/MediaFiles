@@ -3,7 +3,6 @@ package com.bignerdranch.android.mediafiles.app.permission
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -104,13 +103,13 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
 
     override fun requestPermission(permission: String, operationGranted: Runnable?, operationDenied: Runnable?) {
         val callback: PermissionCallback = object : PermissionCallback {
-            override fun onPermissionGranted(b: Boolean) {
-                Log.v("ShiyihuiHLNSKQ", "get permission, start sync")
+            override fun onPermissionGranted(userPresentedWithDialog: Boolean) {
+                logger.v("ShiyihuiHLNSKQ", "get permission, start sync")
                 operationGranted?.run()
             }
 
-            override fun onPermissionDenied(b: Boolean) {
-                Log.v("ShiyihuiHLNSKQ", "deny permission")
+            override fun onPermissionDenied(userPresentedWithDialog: Boolean) {
+                logger.v("ShiyihuiHLNSKQ", "deny permission")
                 operationDenied?.run()
             }
         }

@@ -30,14 +30,12 @@ public class GlobalBusHelper {
 
     GlobalBusHelper(@NonNull Logger logger) {
         this.logger = logger;
-        this.defaultThrowableConsumer = t -> logger.e(TAG, "Consumer exception occurred.", t);
+        this.defaultThrowableConsumer = t -> this.logger.e(TAG, "Consumer exception occurred.", t);
     }
 
     /**
      * Fetches a singular instance of this helper class to be shared across the application
-     * @deprecated This Singleton will be removed as soon as we're done migrating to RxJava (AP-11134).
      */
-    @Deprecated
     public static GlobalBusHelper getInstance() {
         return InstanceHelper.INSTANCE;
     }
