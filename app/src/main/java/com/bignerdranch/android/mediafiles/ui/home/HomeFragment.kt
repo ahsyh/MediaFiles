@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileAdapter
@@ -28,7 +29,7 @@ class HomeFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
         val localItemRecyclerView: RecyclerView = root.findViewById(R.id.mediaFilesRecyclerView)
         localItemRecyclerView.layoutManager = layoutManager
-        adapter = MediaFileAdapter()
+        adapter = MediaFileAdapter(MediaFilesApplication.appComponent.getLogger())
         localItemRecyclerView.adapter = adapter
         homeViewModel.liveMediaFiles.observe(viewLifecycleOwner, Observer { pagedList: PagedList<MediaFile> -> adapter.submitList(pagedList) })
         homeViewModel.text.observe(viewLifecycleOwner, Observer { s -> textView.text = s })

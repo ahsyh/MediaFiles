@@ -86,8 +86,9 @@ class GeneralModule(val context: Context) {
     @Singleton
     fun provideScanAddedWorker(
             mediaStoreUtil: MediaStoreUtil,
-            mediaFileDao: MediaFileDao): ScanAddedTask {
-        return ScanAddedTask(mediaFileDao, mediaStoreUtil)
+            mediaFileDao: MediaFileDao,
+            logger: Logger): ScanAddedTask {
+        return ScanAddedTask(mediaFileDao, mediaStoreUtil, logger)
     }
 
     @Provides

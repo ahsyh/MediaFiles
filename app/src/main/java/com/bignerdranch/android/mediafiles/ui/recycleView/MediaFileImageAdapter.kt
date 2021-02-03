@@ -1,13 +1,13 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
-import android.util.Log
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
+import com.bignerdranch.android.mediafiles.util.log.Logger
 import com.bumptech.glide.Glide
 
-class MediaFileImageAdapter : PagedListAdapter<MediaFile, MediaFileImageViewHolder>(object : DiffUtil.ItemCallback<MediaFile>() {
+class MediaFileImageAdapter(val logger: Logger) : PagedListAdapter<MediaFile, MediaFileImageViewHolder>(object : DiffUtil.ItemCallback<MediaFile>() {
     override fun areItemsTheSame(oldItem: MediaFile, newItem: MediaFile): Boolean {
         return oldItem.id == newItem.id
     }
@@ -23,7 +23,7 @@ class MediaFileImageAdapter : PagedListAdapter<MediaFile, MediaFileImageViewHold
     override fun onBindViewHolder(holder: MediaFileImageViewHolder, position: Int) {
         val item = getItem(position)
         if (item == null) {
-            Log.w(TAG, "Null LocalItem at position: $position")
+            logger.w(TAG, "Null LocalItem at position: $position")
             return
         }
         val path: String?
@@ -32,7 +32,7 @@ class MediaFileImageAdapter : PagedListAdapter<MediaFile, MediaFileImageViewHold
             holder.textView.text = "image"
             Glide.with(holder.context).load(path).into(holder.imageView)
         } else {
-            Log.v("ShiyihuiHLNSKQ", "Load file path null.")
+            logger.v("ShiyihuiHLNSKQ", "Load file path null.")
         }
     }
 

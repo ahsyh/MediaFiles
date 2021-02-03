@@ -1,15 +1,15 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
-import android.util.Log
-import android.util.TimeUtils
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
+import com.bignerdranch.android.mediafiles.util.log.Logger
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
-class MediaFileAdapter : PagedListAdapter<MediaFile, MediaFileViewHolder>(object : DiffUtil.ItemCallback<MediaFile>() {
+class MediaFileAdapter(val logger: Logger) : PagedListAdapter<MediaFile, MediaFileViewHolder>(object : DiffUtil.ItemCallback<MediaFile>() {
     override fun areItemsTheSame(oldItem: MediaFile, newItem: MediaFile): Boolean {
         return oldItem.id == newItem.id
     }
@@ -25,7 +25,7 @@ class MediaFileAdapter : PagedListAdapter<MediaFile, MediaFileViewHolder>(object
     override fun onBindViewHolder(holder: MediaFileViewHolder, position: Int) {
         val item = getItem(position)
         if (item == null) {
-            Log.w(TAG, "Null LocalItem at position: $position")
+            logger.w(TAG, "Null LocalItem at position: $position")
             return
         }
         holder.idView.text = item.id.toString()

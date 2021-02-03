@@ -3,9 +3,7 @@ package com.bignerdranch.android.mediafiles.discovery.worker
 import android.content.ContentResolver
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
 import android.provider.MediaStore
-import androidx.annotation.RequiresApi
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.discovery.model.MediaType
 import com.bignerdranch.android.mediafiles.discovery.model.MediaUri.getUri
