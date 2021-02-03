@@ -35,15 +35,15 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
             permissionCallback.onPermissionGranted(false)
             return
         }
-        var pendingCallbacks = permissionRequests[permission]!!
+        var pendingCallbacks = permissionRequests[permission]
         // Let's request the permission
         if (permissionRequests.containsKey(permission)) {
             // We have a request for this permission, we this request
-            pendingCallbacks.add(permissionCallback)
+            pendingCallbacks?.add(permissionCallback)
         } else {
             // Make a request for the permission
             pendingCallbacks = CopyOnWriteArrayList()
-            pendingCallbacks.add(permissionCallback)
+            pendingCallbacks?.add(permissionCallback)
             permissionRequests[permission] = pendingCallbacks
             requestPermission(permission)
         }

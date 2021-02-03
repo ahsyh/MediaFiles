@@ -24,6 +24,7 @@ class DashboardFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        logger = MediaFilesApplication.appComponent.getLogger()
         dashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_dashboard, container, false)
 //        val layoutManager = GridLayoutManager(context, 3)
@@ -31,7 +32,6 @@ class DashboardFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
         val localItemRecyclerView: RecyclerView = root.findViewById(R.id.mediaFilesImageRecyclerView)
         localItemRecyclerView.layoutManager = layoutManager
-        logger = MediaFilesApplication.appComponent.getLogger()
         adapter = MediaFileImageAdapter(logger)
         localItemRecyclerView.adapter = adapter
         val textView = root.findViewById<TextView>(R.id.text_dashboard)
