@@ -8,14 +8,9 @@ import lombok.Getter;
 /**
  * Event to notify that {@code permission} was denied
  */
-//@AllArgsConstructor
+@AllArgsConstructor
 @Getter
 public class PermissionsChangeEvent {
     @NonNull private final String permission;
     private final boolean granted;
-
-    public PermissionsChangeEvent(final String permission, final boolean granted) {
-        this.permission = permission;
-        this.granted = granted;
-    }
 }
