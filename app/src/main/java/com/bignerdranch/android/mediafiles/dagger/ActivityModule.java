@@ -16,10 +16,14 @@ import dagger.Provides;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 @Module
 public class ActivityModule {
     @NonNull private final AppCompatActivity activity;
+
+    public ActivityModule(@NonNull final AppCompatActivity activity) {
+        this.activity = activity;
+    }
 
     @Provides @PerActivity
     AppCompatActivity provideAppCompatActivity() {
