@@ -1,33 +1,30 @@
-package com.bignerdranch.android.mediafiles.app.permission;
+package com.bignerdranch.android.mediafiles.app.permission
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Permission manager that can handle requests and responses when the application requires a
  * permission
  */
-public interface PermissionsManager {
-
+interface PermissionsManager {
     /**
      * Allows the application to request a specific permission
      *
      * @param permission that we want to request
      * @param permissionCallback to provide the caller with a response of whether the permission was
-     *                           granted or denied
+     * granted or denied
      */
-    void requestPermission(@NonNull String permission, @NonNull PermissionCallback permissionCallback);
+    fun requestPermission(permission: String, permissionCallback: PermissionCallback)
 
     /**
-     * Called when the activity receives an {@link AppCompatActivity#onRequestPermissionsResult(int, String[], int[])}
-     * callback for the {@code permission}
+     * Called when the activity receives an [AppCompatActivity.onRequestPermissionsResult]
+     * callback for the `permission`
      *
      * @param requestCode provided when we made the permission request
      * @param permissions list of permissions we requested, will only contain 1 permission for our use-case
      * @param grantResults contains an int indicating whether the request was granted or denied
      */
-    void onRequestPermissionResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults);
+    fun onRequestPermissionResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray)
 
     /**
      * Query for whether the specified permissions is granted
@@ -35,15 +32,14 @@ public interface PermissionsManager {
      * @param permission that we want to request
      * @return Whether the permission is franted
      */
-    boolean hasPermission(String permission);
+    fun hasPermission(permission: String): Boolean
 
     /**
      * Allows the application to request for storage permission
      *
      * @param permissionCallback to provide the caller with a response of whether the permission was
-     *                           granted or denied
+     * granted or denied
      */
-    void requestStoragePermission(@NonNull PermissionCallback permissionCallback);
-
-    void requestPermission(@NonNull String permission, @Nullable Runnable operationGranted, @Nullable Runnable operationDenied);
+    fun requestStoragePermission(permissionCallback: PermissionCallback)
+    fun requestPermission(permission: String, operationGranted: Runnable?, operationDenied: Runnable?)
 }
