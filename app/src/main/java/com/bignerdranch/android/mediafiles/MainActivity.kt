@@ -48,6 +48,6 @@ class MainActivity : BeanAwareActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>,
                                             grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionsManager!!.onRequestPermissionResult(requestCode, permissions, grantResults)
+        permissionsManager.onRequestPermissionResult(requestCode, permissions, grantResults)
     }
 }
