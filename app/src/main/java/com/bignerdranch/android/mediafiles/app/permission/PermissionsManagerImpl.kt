@@ -43,7 +43,7 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
         } else {
             // Make a request for the permission
             pendingCallbacks = CopyOnWriteArrayList()
-            pendingCallbacks?.add(permissionCallback)
+            pendingCallbacks.add(permissionCallback)
             permissionRequests[permission] = pendingCallbacks
             requestPermission(permission)
         }
@@ -58,7 +58,7 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
      * @param grantResults contains an int indicating whether the request was granted or denied
      */
     override fun onRequestPermissionResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        if (permissions.size <= 0) {
+        if (permissions.isEmpty()) {
             logger.w(TAG, "Received permissions result with an empty permissions list!")
             return
         }
@@ -122,8 +122,8 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
 
     companion object {
         private val TAG = PermissionsManagerImpl::class.java.name
-        fun hasPermission(context: Context?, permission: String?): Boolean {
-            val permissionAvailability = ContextCompat.checkSelfPermission(context!!, permission!!)
+        fun hasPermission(context: Context, permission: String): Boolean {
+            val permissionAvailability = ContextCompat.checkSelfPermission(context, permission)
             return permissionAvailability == PackageManager.PERMISSION_GRANTED
         }
     }
