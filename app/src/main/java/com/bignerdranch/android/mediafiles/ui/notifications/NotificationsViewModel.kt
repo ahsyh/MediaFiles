@@ -8,6 +8,7 @@ import androidx.paging.PagedList
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.gas.dao.FillGasDao
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
+import com.bignerdranch.android.mediafiles.util.AsyncUtil
 import javax.inject.Inject
 
 class NotificationsViewModel : ViewModel() {
@@ -23,8 +24,9 @@ class NotificationsViewModel : ViewModel() {
     }
 
     init {
-        fillGasDao.fillTestData()
         MediaFilesApplication.appComponent.inject(this)
+        AsyncUtil.runOnIOThread{ fillGasDao.fillTestData() }
+
         liveFillGas = LivePagedListBuilder(fillGasDao.all, PAGE_SIZE).build()
         val countLiveData = fillGasDao.liveCount
         text = Transformations.map(countLiveData) { num: Long -> "$num record found in database" }
