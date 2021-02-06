@@ -5,6 +5,7 @@ import com.bignerdranch.android.mediafiles.discovery.Discovery
 import com.bignerdranch.android.mediafiles.discovery.worker.MediaChangeWorker
 import com.bignerdranch.android.mediafiles.ui.dashboard.DashboardViewModel
 import com.bignerdranch.android.mediafiles.ui.home.HomeViewModel
+import com.bignerdranch.android.mediafiles.ui.notifications.NotificationsViewModel
 import com.bignerdranch.android.mediafiles.util.log.Logger
 import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper
 import dagger.Component
@@ -15,6 +16,7 @@ import javax.inject.Singleton
 interface GeneralComponent {
     fun inject(mediaFilesApplication: MediaFilesApplication?)
     fun inject(homeViewModel: HomeViewModel?)
+    fun inject(notificationsViewModel: NotificationsViewModel?)
     fun inject(dashboardViewModel: DashboardViewModel?)
     fun inject(mediaChangeWorker: MediaChangeWorker?)
 

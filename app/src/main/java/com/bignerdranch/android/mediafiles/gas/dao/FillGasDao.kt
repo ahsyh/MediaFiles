@@ -27,4 +27,26 @@ abstract class FillGasDao {
 
     @Delete
     abstract fun delete(fillGasEvent: FillGasEvent)
+
+    fun fillTestData() {
+        val fillGasEvents = ArrayList<FillGasEvent>()
+
+        var event: FillGasEvent
+        var event1 = FillGasEvent()
+        var event2 = FillGasEvent()
+        event = event1
+        event.volume = 23
+        event.distance = 1234
+        event.gasStation = "Esso"
+        event.price = 23.23
+        fillGasEvents.add(event)
+        event = event2
+        event.volume = 45
+        event.distance = 4234
+        event.gasStation = "Mobil"
+        event.price = 45.45
+        fillGasEvents.add(event)
+
+        insertAll(fillGasEvents)
+    }
 }

@@ -31,4 +31,14 @@
     <string name="local_count_label">Local Items: </string>
     <string name="cloud_count_label">Cloud Items: </string>
     <string name="dedupe_stage_label">Dedupe Stage: </string>
+
+    <!-- Fill Gas Item Layout -->
+    <string name="gas_station_label">Gas Station: </string>
+    <string name="gas_added_label">Added: </string>
+    <string name="gas_record_label">Record: </string>
+    <string name="gas_modified_label">Modified: </string>
+    <string name="gas_volume_label">Volume: </string>
+    <string name="gas_distance_label">Distance: </string>
+    <string name="gas_price_label">Price: </string>
+
 </resources>

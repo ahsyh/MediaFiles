@@ -37,6 +37,6 @@ class MediaFileImageAdapter(val logger: Logger) : PagedListAdapter<MediaFile, Me
     }
 
     companion object {
-        private const val TAG = "LocalItemAdapter"
+        private const val TAG = "LocalItemImageAdapter"
     }
 }

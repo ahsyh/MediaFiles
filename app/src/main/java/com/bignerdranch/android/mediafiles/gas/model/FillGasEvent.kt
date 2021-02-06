@@ -12,10 +12,13 @@ class FillGasEvent {
     var id: Long = 0
 
     @ColumnInfo(name = "volume")
-    var volumn: Long = 0
+    var volume: Long = 0
+
+    @ColumnInfo(name = "distance")
+    var distance: Int = 0
 
     @ColumnInfo(name = "price")
-    var price: Long = 0
+    var price: Double = 0.0
 
     @ColumnInfo(name = "longtitude")
     var longtitude: Long = 0
@@ -24,7 +27,7 @@ class FillGasEvent {
     var latitude: Long = 0
 
     @ColumnInfo(name = "gas_station")
-    var gasStation: String = ""
+    var gasStation: String = "Unknown"
 
     @ColumnInfo(name = "date_added")
     var dateAdded: Long = 0 // Getters and setters are ignored for brevity,

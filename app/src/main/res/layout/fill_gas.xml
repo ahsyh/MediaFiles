@@ -32,28 +32,28 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="@string/unified_id_label"
+                    android:text="@string/gas_added_label"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_label_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:id="@+id/unifiedId"
+                    android:id="@+id/gasAddedDate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/item_list_field_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:text="@string/path_label"
+                    android:text="@string/gas_volume_label"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_label_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:id="@+id/itemPath"
+                    android:id="@+id/gasVolume"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="start"/>
@@ -67,28 +67,28 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="@string/added_label"
+                    android:text="@string/gas_distance_label"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_label_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:id="@+id/itemAdded"
+                    android:id="@+id/gasDistance"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/item_list_field_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:text="@string/taken_label"
+                    android:text="@string/gas_price_label"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_label_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:id="@+id/itemTaken"
+                    android:id="@+id/gasPrice"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/item_list_field_margin_end"
@@ -104,14 +104,27 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:text="@string/modified_label"
+                    android:text="@string/gas_station_label"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginEnd="@dimen/default_label_margin_end"
                     android:gravity="start"/>
 
                 <TextView
-                    android:id="@+id/itemModified"
+                    android:id="@+id/gasStation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="start"/>
+
+                <TextView
+                    android:text="@string/gas_record_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="@dimen/default_label_margin_end"
+                    android:gravity="start"/>
+
+                <TextView
+                    android:id="@+id/gasRecordDate"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="start"/>
