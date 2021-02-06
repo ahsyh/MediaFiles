@@ -10,6 +10,8 @@ import com.bignerdranch.android.mediafiles.discovery.worker.MediaStoreUtil
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule
+import com.bignerdranch.android.mediafiles.gas.dao.FillGasDao
+import com.bignerdranch.android.mediafiles.gas.db.FillGasDatabase
 import com.bignerdranch.android.mediafiles.util.log.DefaultLogObfuscator
 import com.bignerdranch.android.mediafiles.util.log.LogObfuscator
 import com.bignerdranch.android.mediafiles.util.log.Logger
@@ -61,6 +63,20 @@ class GeneralModule(val context: Context) {
     fun provideMediaFileDao(
             db: DiscoveryDatabase): MediaFileDao {
         return db.mediaFileDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideFillGasDatabase(
+            context: Context): FillGasDatabase {
+        return FillGasDatabase.getInstance(context)
+    }
+
+    @Provides
+    @Singleton
+    fun provideFillGasDao(
+            db: FillGasDatabase): FillGasDao {
+        return db.fillGasDao()
     }
 
     @Provides
