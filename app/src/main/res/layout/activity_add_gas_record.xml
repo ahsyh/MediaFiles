@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_gravity="center_vertical"
-            android:text="@string/add_one_record" />
+            android:text="@string/save_label" />
 
         <Button
             android:id="@+id/addGasRecordCancelButton"
@@ -31,7 +31,7 @@
             android:layout_width="wrap_content"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_gravity="center_vertical"
-            android:text="@string/add_one_record" />
+            android:text="@string/cancel_label" />
 
     </LinearLayout>
     <androidx.constraintlayout.widget.Guideline

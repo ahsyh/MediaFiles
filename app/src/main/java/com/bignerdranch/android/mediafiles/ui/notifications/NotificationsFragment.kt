@@ -1,5 +1,6 @@
 package com.bignerdranch.android.mediafiles.ui.notifications
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
+import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 import com.bignerdranch.android.mediafiles.ui.recycleView.FillGasAdapter
 
@@ -40,6 +42,8 @@ class NotificationsFragment : Fragment() {
         val button = root.findViewById<Button>(R.id.addGasRecordButton)
         button.setOnClickListener {
             Log.e("==YIHUI==", "setOnClickListener")
+            val intent = Intent(context, AddGasRecordActivity::class.java)
+            startActivity(intent)
         }
 
         return root
