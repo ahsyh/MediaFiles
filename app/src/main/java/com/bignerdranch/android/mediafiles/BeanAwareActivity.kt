@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor
 
 @RequiredArgsConstructor
 open class BeanAwareActivity : AppCompatActivity() {
-    private lateinit var activityComponent: ActivityComponent
+    lateinit var activityComponent: ActivityComponent
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activityComponent = DaggerActivityComponent.builder()

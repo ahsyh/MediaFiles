@@ -29,6 +29,8 @@ abstract class FillGasDao {
     abstract fun delete(fillGasEvent: FillGasEvent)
 
     fun fillTestData() {
+        if (count > 0) return
+
         val fillGasEvents = ArrayList<FillGasEvent>()
 
         var event: FillGasEvent

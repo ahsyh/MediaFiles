@@ -1,6 +1,7 @@
 package com.bignerdranch.android.mediafiles.dagger
 
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
+import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity
 import com.bignerdranch.android.mediafiles.discovery.Discovery
 import com.bignerdranch.android.mediafiles.discovery.worker.MediaChangeWorker
 import com.bignerdranch.android.mediafiles.ui.dashboard.DashboardViewModel
@@ -15,6 +16,7 @@ import javax.inject.Singleton
 @Component(modules = [GeneralModule::class])
 interface GeneralComponent {
     fun inject(mediaFilesApplication: MediaFilesApplication?)
+    fun inject(addGasRecordActivity: AddGasRecordActivity?)
     fun inject(homeViewModel: HomeViewModel?)
     fun inject(notificationsViewModel: NotificationsViewModel?)
     fun inject(dashboardViewModel: DashboardViewModel?)

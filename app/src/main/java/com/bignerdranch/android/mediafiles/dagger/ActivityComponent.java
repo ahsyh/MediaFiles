@@ -1,6 +1,7 @@
 package com.bignerdranch.android.mediafiles.dagger;
 
 import com.bignerdranch.android.mediafiles.MainActivity;
+import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity;
 import com.bignerdranch.android.mediafiles.dagger.scope.PerActivity;
 
 import dagger.Component;

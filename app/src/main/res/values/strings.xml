@@ -41,5 +41,7 @@
     <string name="gas_distance_label">Distance: </string>
     <string name="gas_price_label">Price: </string>
     <string name="add_one_record">Add One Record</string>
+    <string name="save_label">Save</string>
+    <string name="cancel_label">Cancel</string>
 
 </resources>
