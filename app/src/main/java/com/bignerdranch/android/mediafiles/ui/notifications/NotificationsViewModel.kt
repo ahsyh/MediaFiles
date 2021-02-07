@@ -25,7 +25,6 @@ class NotificationsViewModel : ViewModel() {
 
     init {
         MediaFilesApplication.appComponent.inject(this)
-        AsyncUtil.runOnIOThread{ fillGasDao.fillTestData() }
 
         liveFillGas = LivePagedListBuilder(fillGasDao.all, PAGE_SIZE).build()
         val countLiveData = fillGasDao.liveCount

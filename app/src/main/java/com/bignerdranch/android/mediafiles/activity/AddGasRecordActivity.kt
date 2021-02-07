@@ -9,6 +9,7 @@ import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.dagger.ActivityComponent
 import com.bignerdranch.android.mediafiles.gas.dao.FillGasDao
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
+import com.bignerdranch.android.mediafiles.util.AsyncUtil
 import com.bignerdranch.android.mediafiles.util.log.Logger
 import javax.inject.Inject
 import javax.inject.Provider
@@ -29,7 +30,8 @@ class AddGasRecordActivity : BeanAwareActivity() {
         val cancelButton = findViewById<Button>(R.id.addGasRecordCancelButton)
         saveButton.setOnClickListener {
             logger.e(DTAG, "save button clicked")
-            fillGasDao.get().insertAll(setOf(getEventFromEditor()))
+            AsyncUtil.runOnIOThread { fillGasDao.get().addOneRecord(getEventFromEditor()) }
+            this.finish()
         }
         cancelButton.setOnClickListener { this.finish() }
 

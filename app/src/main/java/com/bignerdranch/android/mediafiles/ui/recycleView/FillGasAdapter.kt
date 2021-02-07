@@ -30,8 +30,8 @@ class FillGasAdapter(val logger: Logger) : PagedListAdapter<FillGasEvent, FillGa
         holder.gasStationView.text = item.gasStation
         holder.gasVolumeView.text = item.volume.toString()
         holder.gasDistanceView.text = item.distance.toString()
-        holder.gasAddedDateView.text = timeToDate(1000 * item.dateAdded)
-        holder.gasRecordDateView.text = timeToDate(1000 * item.dateRecord)
+        holder.gasAddedDateView.text = timeToDate(item.dateAdded)
+        holder.gasRecordDateView.text = timeToDate(item.dateRecord)
     }
 
     private fun timeToDate(time: Long): String {

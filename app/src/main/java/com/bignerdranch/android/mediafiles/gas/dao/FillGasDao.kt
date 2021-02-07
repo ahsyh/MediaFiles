@@ -10,7 +10,7 @@ import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 
 @Dao
 abstract class FillGasDao {
-    @get:Query("SELECT * FROM fill_gas")
+    @get:Query("SELECT * FROM fill_gas ORDER BY date_added DESC")
     abstract val all: DataSource.Factory<Int, FillGasEvent>
 
     @Query("SELECT * FROM fill_gas WHERE id IN (:ids)")
@@ -28,27 +28,9 @@ abstract class FillGasDao {
     @Delete
     abstract fun delete(fillGasEvent: FillGasEvent)
 
-    fun fillTestData() {
-        if (count > 0) return
-
+    fun addOneRecord(event: FillGasEvent) {
         val fillGasEvents = ArrayList<FillGasEvent>()
-
-        var event: FillGasEvent
-        var event1 = FillGasEvent()
-        var event2 = FillGasEvent()
-        event = event1
-        event.volume = 23
-        event.distance = 1234
-        event.gasStation = "Esso"
-        event.price = 23.23
         fillGasEvents.add(event)
-        event = event2
-        event.volume = 45
-        event.distance = 4234
-        event.gasStation = "Mobil"
-        event.price = 45.45
-        fillGasEvents.add(event)
-
         insertAll(fillGasEvents)
     }
 }
