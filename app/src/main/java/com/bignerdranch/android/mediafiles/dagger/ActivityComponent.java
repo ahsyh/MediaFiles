@@ -10,4 +10,5 @@ import dagger.Component;
 @Component(dependencies = GeneralComponent.class, modules = { ActivityModule.class })
 public interface ActivityComponent {
     void inject(MainActivity mainActivity);
+    void inject(AddGasRecordActivity addGasRecordActivity);
 }

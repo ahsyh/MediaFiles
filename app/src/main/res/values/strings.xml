@@ -34,9 +34,9 @@
 
     <!-- Fill Gas Item Layout -->
     <string name="gas_station_label">Gas Station: </string>
-    <string name="gas_added_label">Added: </string>
-    <string name="gas_record_label">Record: </string>
-    <string name="gas_modified_label">Modified: </string>
+    <string name="gas_added_label">Added Date: </string>
+    <string name="gas_record_label">Record Date: </string>
+    <string name="gas_modified_label">Modified Date: </string>
     <string name="gas_volume_label">Volume: </string>
     <string name="gas_distance_label">Distance: </string>
     <string name="gas_price_label">Price: </string>
