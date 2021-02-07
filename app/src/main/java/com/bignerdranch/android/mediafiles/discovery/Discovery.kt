@@ -1,6 +1,7 @@
 package com.bignerdranch.android.mediafiles.discovery
 
 import android.content.Context
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask
@@ -23,11 +24,11 @@ class Discovery (val context: Context,
 
     @Synchronized
     private fun init() {
-        logger.v("ShiyihuiHLNSKQ", "Prework, total " + mediaFileDao.count
+        logger.v(DTAG, "Prework, total " + mediaFileDao.count
                 + " items, ")
         workerSchedule.setupMediaStoreChangeWorker()
         scan()
-        logger.v("ShiyihuiHLNSKQ", "Summrizy, total " + mediaFileDao.count
+        logger.v(DTAG, "Summrizy, total " + mediaFileDao.count
                 + " items, ")
     }
 

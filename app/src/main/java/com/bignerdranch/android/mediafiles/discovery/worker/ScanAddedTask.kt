@@ -1,5 +1,6 @@
 package com.bignerdranch.android.mediafiles.discovery.worker
 
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.discovery.model.MediaType
@@ -13,7 +14,7 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao,
                      val logger: Logger) {
 
     fun run() {
-        logger.v("ShiyihuiHLNSKQ", "ScanAddedWorker start")
+        logger.v(DTAG, "ScanAddedWorker start")
         var offset: Long = 0
         val pageSize = 100
         var handledItems = 0
@@ -26,7 +27,7 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao,
             handledItems += files.size
             offset = files[size - 1].mediaStoreId
         }
-        logger.v("ShiyihuiHLNSKQ", "ScanAddedWorker finished, handled $handledItems files")
+        logger.v(DTAG, "ScanAddedWorker finished, handled $handledItems files")
     }
 
     private fun batchHandler(items: List<MediaFile>) {
@@ -34,7 +35,7 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao,
         for (item in items) {
             val paths = arrayOf(item.path)
             if (mediaFileDao.getCountOfGivenPath(paths) <= 0) {
-                logger.v("ShiyihuiHLNSKQ", "insert path: " + item.path)
+                logger.v(DTAG, "insert path: " + item.path)
                 newItems.add(item)
             }
         }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
@@ -53,7 +54,7 @@ class DashboardFragment : Fragment() {
                 val densityDpi = metric.densityDpi
                 val imageWidth = resources.getDimension(R.dimen.item_image_width)
                 result = (width / imageWidth).toInt()
-                logger.v("ShiyihuiHLNSKQ", "value: $width $height $density $densityDpi $result")
+                logger.v(DTAG, "value: $width $height $density $densityDpi $result")
             }
 
             return result

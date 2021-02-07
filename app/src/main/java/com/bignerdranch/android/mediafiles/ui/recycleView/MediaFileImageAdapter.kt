@@ -3,6 +3,7 @@ package com.bignerdranch.android.mediafiles.ui.recycleView
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.util.log.Logger
 import com.bumptech.glide.Glide
@@ -32,7 +33,7 @@ class MediaFileImageAdapter(val logger: Logger) : PagedListAdapter<MediaFile, Me
             holder.textView.text = "image"
             Glide.with(holder.context).load(path).into(holder.imageView)
         } else {
-            logger.v("ShiyihuiHLNSKQ", "Load file path null.")
+            logger.v(DTAG, "Load file path null.")
         }
     }
 

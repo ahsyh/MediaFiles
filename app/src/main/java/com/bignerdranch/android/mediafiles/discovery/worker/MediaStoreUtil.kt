@@ -4,6 +4,7 @@ import android.content.ContentResolver
 import android.database.Cursor
 import android.net.Uri
 import android.provider.MediaStore
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.discovery.model.MediaType
 import com.bignerdranch.android.mediafiles.discovery.model.MediaUri.getUri
@@ -32,7 +33,7 @@ class MediaStoreUtil (val contentResolver: ContentResolver, val logger: Logger) 
                 count = cursor.count.toLong()
             }
         } catch (e: Exception) {
-            logger.v("ShiyihuiHLNSKQ", "problem in isPathExist:" + e.message)
+            logger.v(DTAG, "problem in isPathExist:" + e.message)
         }
         return count > 0L
     }
@@ -53,27 +54,27 @@ class MediaStoreUtil (val contentResolver: ContentResolver, val logger: Logger) 
                 MediaStore.Images.Media.DATE_MODIFIED,
                 MediaStore.Images.Media.SIZE)
         val parameters = arrayOf("" + offset)
-        logger.v("ShiyihuiHLNSKQ", "in fetchMediaFiles try to fetch $limit items begin from $offset")
+        logger.v(DTAG, "in fetchMediaFiles try to fetch $limit items begin from $offset")
         try {
             val sortOrderStr = MediaStore.MediaColumns._ID  + " ASC" + if (limit > 0) " LIMIT $limit" else ""
             val selection = MediaStore.MediaColumns._ID + " > ?"
-            logger.v("ShiyihuiHLNSKQ", "query string, uri: ${uri.toString()}, selection: $selection, sortOrder: $sortOrderStr")
+            logger.v(DTAG, "query string, uri: ${uri.toString()}, selection: $selection, sortOrder: $sortOrderStr")
             contentResolver.query(
                     uri, selectors, selection, parameters, sortOrderStr)?.use { cursor ->
                 cursor.moveToFirst()
 
-                logger.v("ShiyihuiHLNSKQ", "query get ${cursor.count} photos. moveToFirst")
+                logger.v(DTAG, "query get ${cursor.count} photos. moveToFirst")
                 while (!cursor.isAfterLast) {
                     val item = itemFromCursor(cursor)
                     item.let {
-                        logger.v("ShiyihuiHLNSKQ", "get item: ${it.path}, ${it.dateAdded}, ${it.dateTaken}, ${it.dateModify}")
+                        logger.v(DTAG, "get item: ${it.path}, ${it.dateAdded}, ${it.dateTaken}, ${it.dateModify}")
                     }
                     result.add(item)
                     cursor.moveToNext()
                 }
             }
         } catch (e: Exception) {
-            logger.v("ShiyihuiHLNSKQ", "problem in fetchMediaFiles:" + e.message)
+            logger.v(DTAG, "problem in fetchMediaFiles:" + e.message)
         }
         return result
     }

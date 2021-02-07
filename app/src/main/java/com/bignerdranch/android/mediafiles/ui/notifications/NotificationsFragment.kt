@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity
@@ -41,7 +42,7 @@ class NotificationsFragment : Fragment() {
 
         val button = root.findViewById<Button>(R.id.addGasRecordButton)
         button.setOnClickListener {
-            Log.e("==YIHUI==", "setOnClickListener")
+            Log.e(DTAG, "setOnClickListener")
             val intent = Intent(context, AddGasRecordActivity::class.java)
             startActivity(intent)
         }

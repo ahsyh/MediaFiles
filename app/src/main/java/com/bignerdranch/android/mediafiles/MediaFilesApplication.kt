@@ -32,10 +32,10 @@ class MediaFilesApplication : MultiDexApplication() {
         StethoHelper.init(this)
 
         if (PermissionsManagerImpl.hasPermission(this, WRITE_EXTERNAL_STORAGE)) {
-            logger.v("ShiyihuiHLNSKQ", "has permission already, start sync");
+            logger.v(DTAG, "has permission already, start sync");
             discovery.get().initAsync();
         } else {
-            logger.v("ShiyihuiHLNSKQ", "has no permission, skip sync now");
+            logger.v(DTAG, "has no permission, skip sync now");
         }
     }
 

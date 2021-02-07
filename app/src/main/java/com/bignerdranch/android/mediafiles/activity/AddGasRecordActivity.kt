@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.dagger.GeneralComponent
@@ -30,7 +31,7 @@ class AddGasRecordActivity : AppCompatActivity() {
         val saveButton = findViewById<Button>(R.id.addGasRecordSaveButton)
         val cancelButton = findViewById<Button>(R.id.addGasRecordCancelButton)
         saveButton.setOnClickListener {
-            logger.e("==YIHUI==", "save button clicked")
+            logger.e(DTAG, "save button clicked")
             //fillGasDao.insertAll(setOf(fillGasEvent))
         }
         cancelButton.setOnClickListener { this.finish() }

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.util.log.Logger
 import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper
 import java.util.concurrent.CopyOnWriteArrayList
@@ -104,12 +105,12 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
     override fun requestPermission(permission: String, operationGranted: Runnable?, operationDenied: Runnable?) {
         val callback: PermissionCallback = object : PermissionCallback {
             override fun onPermissionGranted(userPresentedWithDialog: Boolean) {
-                logger.v("ShiyihuiHLNSKQ", "get permission, start sync")
+                logger.v(DTAG, "get permission, start sync")
                 operationGranted?.run()
             }
 
             override fun onPermissionDenied(userPresentedWithDialog: Boolean) {
-                logger.v("ShiyihuiHLNSKQ", "deny permission")
+                logger.v(DTAG, "deny permission")
                 operationDenied?.run()
             }
         }
