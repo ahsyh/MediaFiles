@@ -40,5 +40,6 @@
     <string name="gas_volume_label">Volume: </string>
     <string name="gas_distance_label">Distance: </string>
     <string name="gas_price_label">Price: </string>
+    <string name="add_one_record">Add One Record</string>
 
 </resources>
