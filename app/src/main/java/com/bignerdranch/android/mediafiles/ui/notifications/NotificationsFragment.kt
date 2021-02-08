@@ -33,7 +33,7 @@ class NotificationsFragment : Fragment() {
         layoutManager.orientation = RecyclerView.VERTICAL
         val localItemRecyclerView: RecyclerView = root.findViewById(R.id.gasFillRecyclerView)
         localItemRecyclerView.layoutManager = layoutManager
-        adapter = FillGasAdapter(MediaFilesApplication.appComponent.getLogger())
+        adapter = FillGasAdapter(context, MediaFilesApplication.appComponent.getLogger())
         localItemRecyclerView.adapter = adapter
         notificationsViewModel.liveFillGas.observe(viewLifecycleOwner, { pagedList: PagedList<FillGasEvent> -> adapter.submitList(pagedList) })
 
