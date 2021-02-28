@@ -17,6 +17,7 @@
         app:layout_constraintTop_toBottomOf="@+id/horizontal_guideline_summary"
         >
 
+            <!-- Input Parameter Zone -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -36,8 +37,10 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:textStyle="bold|italic"
+
                         android:layout_marginEnd="@dimen/default_label_margin_end"
-                        android:gravity="start"/>
+                        android:gravity="center_vertical"/>
 
                     <EditText
                         android:id="@+id/gas_added_date_value"
@@ -45,7 +48,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="4"
                         android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:autofillHints=""
                         android:inputType="date" />
 
@@ -55,7 +58,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:autofillHints=""
                         />
                 </LinearLayout>
@@ -73,8 +76,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:textStyle="bold|italic"
                         android:layout_marginEnd="@dimen/default_label_margin_end"
-                        android:gravity="start"/>
+                        android:gravity="center_vertical"/>
 
                     <EditText
                         android:id="@+id/gas_station_value"
@@ -82,7 +86,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:autofillHints=""
                         android:inputType="text" />
                 </LinearLayout>
@@ -100,8 +104,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:textStyle="bold|italic"
                         android:layout_marginEnd="@dimen/default_label_margin_end"
-                        android:gravity="start"/>
+                        android:gravity="center_vertical"/>
 
                     <EditText
                         android:id="@+id/gas_volume_value"
@@ -109,7 +114,7 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:autofillHints=""
                         android:inputType="numberDecimal" />
                 </LinearLayout>
@@ -127,8 +132,9 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="2"
+                        android:textStyle="bold|italic"
                         android:layout_marginEnd="@dimen/default_label_margin_end"
-                        android:gravity="start"/>
+                        android:gravity="center_vertical"/>
 
                     <EditText
                         android:id="@+id/gas_distance_value"
@@ -136,11 +142,38 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5"
                         android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                        android:gravity="start"
+                        android:gravity="center_vertical"
                         android:autofillHints=""
                         android:inputType="numberDecimal" />
                 </LinearLayout>
 
+                <!-- No.5 row contains  -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/default_bottom_padding"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
+
+                    <TextView
+                        android:text="@string/gas_price_label"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:textStyle="bold|italic"
+                        android:layout_marginEnd="@dimen/default_label_margin_end"
+                        android:gravity="center_vertical"/>
+
+                    <EditText
+                        android:id="@+id/gas_price_value"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                        android:gravity="center_vertical"
+                        android:autofillHints=""
+                        android:inputType="numberDecimal" />
+                </LinearLayout>
             </LinearLayout>
     </LinearLayout>
     <LinearLayout

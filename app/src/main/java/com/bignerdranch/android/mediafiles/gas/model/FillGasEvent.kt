@@ -18,7 +18,7 @@ class FillGasEvent {
     var distance: Int = 0
 
     @ColumnInfo(name = "price")
-    var price: Double = 0.0
+    var price: Long = 0
 
     @ColumnInfo(name = "longtitude")
     var longtitude: Long = 0

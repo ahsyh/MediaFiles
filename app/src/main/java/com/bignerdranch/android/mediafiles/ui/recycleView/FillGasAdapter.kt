@@ -1,5 +1,6 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
+import android.annotation.SuppressLint
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -20,6 +21,7 @@ class FillGasAdapter(val logger: Logger) : PagedListAdapter<FillGasEvent, FillGa
         return FillGasViewHolder.createFromParent(parent)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: FillGasViewHolder, position: Int) {
         val item = getItem(position)
         if (item == null) {
@@ -27,7 +29,8 @@ class FillGasAdapter(val logger: Logger) : PagedListAdapter<FillGasEvent, FillGa
             return
         }
         holder.gasStationView.text = item.gasStation
-        holder.gasVolumeView.text = item.volume.toString()
+        holder.gasVolumeView.text = "${item.volume/1000}.${"%03d".format(item.volume%1000)}"
+        holder.gasPriceView.text = "${item.price/100}.${"%02d".format(item.price%100)}"
         holder.gasDistanceView.text = item.distance.toString()
         holder.gasAddedDateView.text = SystemUtil.timeToDate(item.dateAdded)
         holder.gasRecordDateView.text = SystemUtil.timeToDate(item.dateRecord)

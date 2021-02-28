@@ -23,6 +23,7 @@ class AddGasRecordActivity : BeanAwareActivity() {
     lateinit var gasVolumeEditor: EditText
     lateinit var gasDistanceEditor: EditText
     lateinit var gasDateEditor: EditText
+    lateinit var gasPriceEditor: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +42,7 @@ class AddGasRecordActivity : BeanAwareActivity() {
         gasVolumeEditor = findViewById<EditText>(R.id.gas_volume_value)
         gasDistanceEditor = findViewById<EditText>(R.id.gas_distance_value)
         gasDateEditor = findViewById<EditText>(R.id.gas_added_date_value)
+        gasPriceEditor = findViewById<EditText>(R.id.gas_price_value)
 
         gasDateEditor.setText(SystemUtil.timeToDate(System.currentTimeMillis()))
     }
@@ -51,8 +53,9 @@ class AddGasRecordActivity : BeanAwareActivity() {
         }
 
         event.distance = gasDistanceEditor.text.toString().toInt()
-        event.volume = gasVolumeEditor.text.toString().toLong()
+        event.volume = (gasVolumeEditor.text.toString().toDouble() * 1000).toLong()
         event.gasStation = gasStationEditor.text.toString()
+        event.price = (gasPriceEditor.text.toString().toDouble() * 100).toLong()
 
         var date = SystemUtil.stringToDate(gasDateEditor.text.toString())
         if (date < 0) date = System.currentTimeMillis()
