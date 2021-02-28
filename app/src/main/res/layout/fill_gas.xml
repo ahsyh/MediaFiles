@@ -110,7 +110,7 @@
 
             </LinearLayout>
 
-            <!-- Third row contains unified id and dates -->
+            <!-- Third row contains record dates -->
             <LinearLayout
                 android:id="@+id/itemThirdRow"
                 android:layout_width="wrap_content"
@@ -131,6 +131,7 @@
                     android:gravity="start"/>
 
             </LinearLayout>
+
         </LinearLayout>
     </HorizontalScrollView>
 </LinearLayout>

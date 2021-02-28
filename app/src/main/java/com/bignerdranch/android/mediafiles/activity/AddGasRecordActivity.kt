@@ -56,9 +56,9 @@ class AddGasRecordActivity : BeanAwareActivity() {
 
         var date = SystemUtil.stringToDate(gasDateEditor.text.toString())
         if (date < 0) date = System.currentTimeMillis()
-        event.dateRecord = date
+        event.dateRecord = System.currentTimeMillis()
         event.dateAdded = date
-        event.dateModify = date
+        event.dateModify = System.currentTimeMillis()
 
         return event
     }
