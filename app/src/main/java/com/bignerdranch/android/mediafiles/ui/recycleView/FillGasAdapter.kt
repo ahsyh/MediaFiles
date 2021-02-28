@@ -4,9 +4,8 @@ import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
+import com.bignerdranch.android.mediafiles.util.SystemUtil
 import com.bignerdranch.android.mediafiles.util.log.Logger
-import java.text.SimpleDateFormat
-import java.util.*
 
 class FillGasAdapter(val logger: Logger) : PagedListAdapter<FillGasEvent, FillGasViewHolder>(object : DiffUtil.ItemCallback<FillGasEvent>() {
     override fun areItemsTheSame(oldItem: FillGasEvent, newItem: FillGasEvent): Boolean {
@@ -30,13 +29,8 @@ class FillGasAdapter(val logger: Logger) : PagedListAdapter<FillGasEvent, FillGa
         holder.gasStationView.text = item.gasStation
         holder.gasVolumeView.text = item.volume.toString()
         holder.gasDistanceView.text = item.distance.toString()
-        holder.gasAddedDateView.text = timeToDate(item.dateAdded)
-        holder.gasRecordDateView.text = timeToDate(item.dateRecord)
-    }
-
-    private fun timeToDate(time: Long): String {
-        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
-        return sdf.format(Date(time))
+        holder.gasAddedDateView.text = SystemUtil.timeToDate(item.dateAdded)
+        holder.gasRecordDateView.text = SystemUtil.timeToDate(item.dateRecord)
     }
 
     companion object {

@@ -17,173 +17,131 @@
         app:layout_constraintTop_toBottomOf="@+id/horizontal_guideline_summary"
         >
 
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/default_bottom_padding"
                 android:orientation="vertical">
 
                 <!-- First row contains  -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/default_bottom_padding"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_height="wrap_content"
-                        android:layout_width="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical"
-                        >
-                        <TextView
-                            android:text="@string/gas_added_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/default_label_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <EditText
-                            android:id="@+id/gas_added_date_value"
-                            android:layout_width="@dimen/item_edit_width_middle"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    <TextView
+                        android:text="@string/gas_added_label"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginEnd="@dimen/default_label_margin_end"
+                        android:gravity="start"/>
 
+                    <EditText
+                        android:id="@+id/gas_added_date_value"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                        android:gravity="start"
+                        android:autofillHints=""
+                        android:inputType="date" />
+
+                    <Button
+                        android:id="@+id/gas_added_date_picker"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                        android:gravity="start"
+                        android:autofillHints=""
+                        />
                 </LinearLayout>
 
                 <!-- Second row contains  -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/default_bottom_padding"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <TextView
-                            android:text="@string/gas_station_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/default_label_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <EditText
-                            android:id="@+id/gas_station_value"
-                            android:layout_width="@dimen/item_edit_width_middle"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    <TextView
+                        android:text="@string/gas_station_label"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginEnd="@dimen/default_label_margin_end"
+                        android:gravity="start"/>
 
+                    <EditText
+                        android:id="@+id/gas_station_value"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                        android:gravity="start"
+                        android:autofillHints=""
+                        android:inputType="text" />
                 </LinearLayout>
 
                 <!-- No.3 row contains  -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/default_bottom_padding"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <TextView
-                            android:text="@string/gas_volume_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/default_label_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <EditText
-                            android:id="@+id/gas_volume_value"
-                            android:layout_width="@dimen/item_edit_width_middle"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    <TextView
+                        android:text="@string/gas_volume_label"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginEnd="@dimen/default_label_margin_end"
+                        android:gravity="start"/>
 
+                    <EditText
+                        android:id="@+id/gas_volume_value"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                        android:gravity="start"
+                        android:autofillHints=""
+                        android:inputType="numberDecimal" />
                 </LinearLayout>
 
                 <!-- No.4 row contains  -->
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/default_bottom_padding"
-                    android:orientation="horizontal">
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <TextView
-                            android:text="@string/gas_distance_label"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/default_label_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    android:orientation="horizontal"
+                    android:baselineAligned="false">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:paddingBottom="@dimen/default_bottom_padding"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintLeft_toLeftOf="@+id/vertical_guideline_edtorLabel"
-                        android:orientation="vertical">
-                        <EditText
-                            android:id="@+id/gas_distance_value"
-                            android:layout_width="@dimen/item_edit_width_middle"
-                            android:layout_height="match_parent"
-                            android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                            android:gravity="start"/>
-                    </LinearLayout>
+                    <TextView
+                        android:text="@string/gas_distance_label"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="2"
+                        android:layout_marginEnd="@dimen/default_label_margin_end"
+                        android:gravity="start"/>
 
+                    <EditText
+                        android:id="@+id/gas_distance_value"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="5"
+                        android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                        android:gravity="start"
+                        android:autofillHints=""
+                        android:inputType="numberDecimal" />
                 </LinearLayout>
-                <!-- No.4 row end  -->
-
 
             </LinearLayout>
-        </HorizontalScrollView>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/actions"
@@ -199,7 +157,8 @@
         <Button
             android:id="@+id/addGasRecordSaveButton"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             app:layout_constraintLeft_toLeftOf="parent"
             android:layout_gravity="center_vertical"
             android:text="@string/save_label" />
@@ -207,7 +166,8 @@
         <Button
             android:id="@+id/addGasRecordCancelButton"
             android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             app:layout_constraintRight_toRightOf="parent"
             android:layout_gravity="center_vertical"
             android:text="@string/cancel_label" />
@@ -226,11 +186,4 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.9" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical_guideline_edtorLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.3" />
 </androidx.constraintlayout.widget.ConstraintLayout>
