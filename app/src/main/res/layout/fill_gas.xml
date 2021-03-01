@@ -15,8 +15,6 @@
         android:gravity="start"/>
 
     <!-- Local Item Fields -->
-
-
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -24,7 +22,7 @@
         android:paddingBottom="@dimen/default_bottom_padding"
         android:orientation="vertical">
 
-        <!-- First row is just the path since it is usually long -->
+        <!-- First row -->
         <LinearLayout
             android:id="@+id/itemTopRow"
             android:layout_width="match_parent"
@@ -50,7 +48,7 @@
 
         </LinearLayout>
 
-        <!-- Second row contains unified id and dates -->
+        <!-- Second row -->
         <LinearLayout
             android:id="@+id/itemSecondRow"
             android:layout_width="match_parent"
@@ -71,7 +69,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/default_label_margin_end"
+                android:layout_marginEnd="@dimen/item_list_field_margin_end"
                 android:gravity="start"/>
 
             <TextView
@@ -113,7 +111,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/default_label_margin_end"
+                android:layout_marginEnd="@dimen/item_list_field_margin_end"
                 android:gravity="start"/>
 
             <TextView
@@ -130,7 +128,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="1"
-                android:layout_marginEnd="@dimen/default_label_margin_end"
+                android:layout_marginEnd="@dimen/item_list_field_margin_end"
                 android:gravity="start"/>
 
         </LinearLayout>
@@ -156,7 +154,7 @@
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
                 android:layout_weight="3"
-                android:layout_marginEnd="@dimen/default_label_margin_end"
+                android:layout_marginEnd="@dimen/item_list_field_margin_end"
                 android:gravity="start"/>
         </LinearLayout>
 
