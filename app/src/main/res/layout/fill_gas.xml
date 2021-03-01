@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginEnd="@dimen/item_list_field_margin_end"
-        android:gravity="start"/>
+        android:gravity="center_vertical|start"/>
 
     <!-- Local Item Fields -->
     <LinearLayout
@@ -22,7 +22,7 @@
         android:paddingBottom="@dimen/default_bottom_padding"
         android:orientation="vertical">
 
-        <!-- First row -->
+        <!-- Date rows -->
         <LinearLayout
             android:id="@+id/itemTopRow"
             android:layout_width="match_parent"
@@ -33,10 +33,10 @@
                 android:text="@string/gas_added_label"
                 android:layout_height="match_parent"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:textStyle="bold|italic"
                 android:layout_marginEnd="@dimen/default_label_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:id="@+id/gasAddedDate"
@@ -44,11 +44,35 @@
                 android:layout_width="0dp"
                 android:layout_weight="3"
                 android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
         </LinearLayout>
 
-        <!-- Second row -->
+        <LinearLayout
+            android:id="@+id/itemForthRow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/item_list_row_height"
+            android:orientation="horizontal">
+
+            <TextView
+                android:text="@string/gas_record_label"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:textStyle="bold|italic"
+                android:layout_marginEnd="@dimen/default_label_margin_end"
+                android:gravity="center_vertical|start"/>
+
+            <TextView
+                android:id="@+id/gasRecordDate"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_marginEnd="@dimen/item_list_field_margin_end"
+                android:gravity="center_vertical|start"/>
+        </LinearLayout>
+
+        <!-- Detailed data rows -->
         <LinearLayout
             android:id="@+id/itemSecondRow"
             android:layout_width="match_parent"
@@ -62,7 +86,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold|italic"
                 android:layout_marginEnd="@dimen/default_label_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:id="@+id/gasVolume"
@@ -70,7 +94,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:text="@string/gas_distance_label"
@@ -79,7 +103,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold|italic"
                 android:layout_marginEnd="@dimen/default_label_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:id="@+id/gasDistance"
@@ -87,7 +111,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
         </LinearLayout>
 
@@ -104,7 +128,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold|italic"
                 android:layout_marginEnd="@dimen/default_label_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:id="@+id/gasStation"
@@ -112,7 +136,7 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:text="@string/gas_price_label"
@@ -121,7 +145,7 @@
                 android:layout_weight="1"
                 android:textStyle="bold|italic"
                 android:layout_marginEnd="@dimen/default_label_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
             <TextView
                 android:id="@+id/gasPrice"
@@ -129,33 +153,8 @@
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                android:gravity="start"/>
+                android:gravity="center_vertical|start"/>
 
-        </LinearLayout>
-
-        <!-- Forth row contains record dates -->
-        <LinearLayout
-            android:id="@+id/itemForthRow"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/item_list_row_height"
-            android:orientation="horizontal">
-
-            <TextView
-                android:text="@string/gas_record_label"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:textStyle="bold|italic"
-                android:layout_marginEnd="@dimen/default_label_margin_end"
-                android:gravity="start"/>
-
-            <TextView
-                android:id="@+id/gasRecordDate"
-                android:layout_height="match_parent"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_marginEnd="@dimen/item_list_field_margin_end"
-                android:gravity="start"/>
         </LinearLayout>
 
     </LinearLayout>
