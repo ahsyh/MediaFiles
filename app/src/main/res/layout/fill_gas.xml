@@ -158,7 +158,6 @@
                 android:layout_weight="3"
                 android:layout_marginEnd="@dimen/default_label_margin_end"
                 android:gravity="start"/>
-
         </LinearLayout>
 
     </LinearLayout>
