@@ -15,11 +15,10 @@ import java.util.concurrent.CopyOnWriteArrayList
  * Utility class to manage runtime permissions introduced in Android Marshmallow
  */
 class PermissionsManagerImpl(private val activity: AppCompatActivity,
-                             logger: Logger,
-                             globalBusHelper: GlobalBusHelper) : PermissionsManager {
+                             logger: Logger) : PermissionsManager {
     private val REQUEST_CODE_ASK_PERMISSIONS = 123
     private val permissionRequests: MutableMap<String?, MutableList<PermissionCallback>>
-    private val globalBusHelper: GlobalBusHelper
+    private val globalBusHelper: GlobalBusHelper<PermissionsChangeEvent>
     private val logger: Logger
 
     /**
@@ -131,7 +130,7 @@ class PermissionsManagerImpl(private val activity: AppCompatActivity,
 
     init {
         permissionRequests = HashMap()
-        this.globalBusHelper = globalBusHelper
+        this.globalBusHelper = GlobalBusHelper<PermissionsChangeEvent>(logger)
         this.logger = logger
     }
 }

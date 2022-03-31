@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import com.bignerdranch.android.mediafiles.MediaFilesApplication;
 import com.bignerdranch.android.mediafiles.util.log.Logger;
 
+import io.reactivex.Observer;
 import io.reactivex.annotations.SchedulerSupport;
 import io.reactivex.functions.Consumer;
 
@@ -16,19 +17,19 @@ import io.reactivex.subjects.PublishSubject;
 /**
  * A pub/sub component that allows type-specific events to be published and subscribed to.
  */
-public class GlobalBusHelper {
+public class GlobalBusHelper<T> {
 
     private static final String TAG = GlobalBusHelper.class.getSimpleName();
 
     /**
      * The underlying {@link PublishSubject} instance.
      */
-    @NonNull private final PublishSubject<Object> publishSubject = PublishSubject.create();
+    @NonNull private final PublishSubject<T> publishSubject = PublishSubject.create();
     @NonNull private final Consumer<Throwable> defaultThrowableConsumer;
 
     @NonNull private final Logger logger;
 
-    GlobalBusHelper(@NonNull Logger logger) {
+    public GlobalBusHelper(@NonNull Logger logger) {
         this.logger = logger;
         this.defaultThrowableConsumer = t -> this.logger.e(TAG, "Consumer exception occurred.", t);
     }
@@ -36,20 +37,20 @@ public class GlobalBusHelper {
     /**
      * Fetches a singular instance of this helper class to be shared across the application
      */
-    public static GlobalBusHelper getInstance() {
-        return InstanceHelper.INSTANCE;
-    }
-
-    private static class InstanceHelper {
-        private static final GlobalBusHelper INSTANCE =
-                new GlobalBusHelper(MediaFilesApplication.appComponent.getLogger());
-    }
+//    public static GlobalBusHelper getInstance() {
+//        return InstanceHelper.INSTANCE;
+//    }
+//
+//    private static class InstanceHelper {
+//        private static final GlobalBusHelper INSTANCE =
+//                new GlobalBusHelper(MediaFilesApplication.appComponent.getLogger());
+//    }
 
     /**
      * Publishes an event to the underlying {@link PublishSubject}.
      * @param event The event describing the message sent.
      */
-    public void publish(@NonNull final Object event) {
+    public void publish(@NonNull final T event) {
         publishSubject.onNext(event);
     }
 
@@ -65,10 +66,11 @@ public class GlobalBusHelper {
     public <T> PausableDisposableObserver<T> subscribe(@NonNull final Class<T> clazz,
                                                        @NonNull final Consumer<T> consumer, @NonNull final Consumer<Throwable> errorConsumer,
                                                        @NonNull final Scheduler scheduler) {
-        final PausableDisposableObserver observer = new PausableDisposableObserver(consumer, errorConsumer);
+        final PausableDisposableObserver<T> observer = new PausableDisposableObserver<T>(consumer, errorConsumer);
+        final Observer<T> ob = observer;
         publishSubject.filter(e -> e.getClass().equals(clazz))
                 .observeOn(scheduler)
-                .subscribe(observer);
+                .subscribe(ob);
 
         return observer;
     }

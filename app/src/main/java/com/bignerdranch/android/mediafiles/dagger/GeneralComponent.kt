@@ -24,6 +24,5 @@ interface GeneralComponent {
 
     fun getLogger(): Logger
     fun getDiscovery(): Discovery
-    fun getGlobalBusHelper(): GlobalBusHelper
     fun getFillGasDao(): FillGasDao
 }

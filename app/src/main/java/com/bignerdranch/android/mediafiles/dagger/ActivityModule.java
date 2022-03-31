@@ -41,8 +41,7 @@ public class ActivityModule {
 
     @Provides @PerActivity
     PermissionsManager providePermissionManager(
-            @NonNull final Logger logger,
-            @NonNull final GlobalBusHelper globalBusHelper) {
-        return new PermissionsManagerImpl(activity, logger, globalBusHelper);
+            @NonNull final Logger logger) {
+        return new PermissionsManagerImpl(activity, logger);
     }
 }
