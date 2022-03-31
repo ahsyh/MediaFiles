@@ -5,9 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bignerdranch.android.mediafiles.dagger.ActivityComponent
 import com.bignerdranch.android.mediafiles.dagger.ActivityModule
 import com.bignerdranch.android.mediafiles.dagger.DaggerActivityComponent
-import lombok.RequiredArgsConstructor
 
-@RequiredArgsConstructor
 open class BeanAwareActivity : AppCompatActivity() {
     lateinit var activityComponent: ActivityComponent
     override fun onCreate(savedInstanceState: Bundle?) {

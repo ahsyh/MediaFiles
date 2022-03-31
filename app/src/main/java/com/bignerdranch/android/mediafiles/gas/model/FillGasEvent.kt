@@ -3,10 +3,8 @@ package com.bignerdranch.android.mediafiles.gas.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import lombok.Data
 
 @Entity(tableName = "fill_gas")
-@Data
 class FillGasEvent {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

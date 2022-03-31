@@ -5,14 +5,11 @@ import androidx.annotation.Nullable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import lombok.RequiredArgsConstructor;
-
 /**
  * This class looks for specific patterns and obfuscates personally identifiable information (PII),
  * which is currently not allowed to be recorded in Spectator.
  * @see <a href="https://issues.labcollab.net/browse/AP-10444">AP-10444</a>
  */
-@RequiredArgsConstructor
 public class DefaultLogObfuscator implements LogObfuscator {
 
     static final String TAG = "DefaultLogObfuscator";

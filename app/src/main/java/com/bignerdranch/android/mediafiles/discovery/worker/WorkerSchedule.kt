@@ -6,10 +6,8 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.bignerdranch.android.mediafiles.discovery.model.MediaType
 import com.bignerdranch.android.mediafiles.discovery.model.MediaUri.getUri
-import lombok.RequiredArgsConstructor
 import java.util.concurrent.TimeUnit
 
-@RequiredArgsConstructor
 class WorkerSchedule (val workManager: WorkManager) {
     fun setupMediaStoreChangeWorker() {
         val constraints = Constraints.Builder()

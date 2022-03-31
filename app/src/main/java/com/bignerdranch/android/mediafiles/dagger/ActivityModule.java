@@ -2,6 +2,7 @@ package com.bignerdranch.android.mediafiles.dagger;
 
 import android.app.Activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Lifecycle;
 
@@ -13,13 +14,11 @@ import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper;
 
 import dagger.Module;
 import dagger.Provides;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 
-//@RequiredArgsConstructor
 @Module
 public class ActivityModule {
-    @NonNull private final AppCompatActivity activity;
+    @NonNull
+    private final AppCompatActivity activity;
 
     public ActivityModule(@NonNull final AppCompatActivity activity) {
         this.activity = activity;

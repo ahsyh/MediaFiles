@@ -8,9 +8,7 @@ import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule
 import com.bignerdranch.android.mediafiles.util.AsyncUtil
 import com.bignerdranch.android.mediafiles.util.log.Logger
-import lombok.RequiredArgsConstructor
 
-@RequiredArgsConstructor
 class Discovery (val context: Context,
     val mediaFileDao: MediaFileDao,
     val addedWorker: ScanAddedTask,

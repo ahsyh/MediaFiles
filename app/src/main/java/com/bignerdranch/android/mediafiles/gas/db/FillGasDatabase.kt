@@ -4,10 +4,14 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.work.impl.WorkDatabaseMigrations.MIGRATION_1_2
 import com.bignerdranch.android.mediafiles.gas.dao.FillGasDao
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 
-@Database(entities = [FillGasEvent::class], version = 1, exportSchema = false)
+@Database(
+    version = 2,
+    entities = [FillGasEvent::class],
+    exportSchema = false)
 abstract class FillGasDatabase: RoomDatabase() {
     abstract fun fillGasDao(): FillGasDao
 
@@ -18,11 +22,12 @@ abstract class FillGasDatabase: RoomDatabase() {
             synchronized(sLock) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
-                            context.applicationContext,
-                            FillGasDatabase::class.java,
-                            "fill_gas.db")
-                            .fallbackToDestructiveMigration()
-                            .build()
+                        context.applicationContext,
+                        FillGasDatabase::class.java,
+                        "fill_gas.db")
+                        .fallbackToDestructiveMigration()
+                        .addMigrations(MIGRATION_1_2)
+                        .build()
                 }
                 return INSTANCE!!
             }

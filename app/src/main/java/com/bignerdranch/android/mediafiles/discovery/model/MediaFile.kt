@@ -3,10 +3,8 @@ package com.bignerdranch.android.mediafiles.discovery.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import lombok.Data
 
 @Entity(tableName = "media_file")
-@Data
 class MediaFile {
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

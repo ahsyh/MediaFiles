@@ -5,9 +5,7 @@ import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.discovery.model.MediaType
 import com.bignerdranch.android.mediafiles.util.log.Logger
-import lombok.RequiredArgsConstructor
 
-@RequiredArgsConstructor
 class ScanAddedTask (val mediaFileDao: MediaFileDao,
                      val mediaStoreUtil: MediaStoreUtil,
                      val logger: Logger) {

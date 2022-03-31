@@ -2,6 +2,7 @@ package com.bignerdranch.android.mediafiles.dagger
 
 import android.content.ContentResolver
 import android.content.Context
+import androidx.annotation.NonNull
 import androidx.work.WorkManager
 import com.bignerdranch.android.mediafiles.discovery.Discovery
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
@@ -19,11 +20,8 @@ import com.bignerdranch.android.mediafiles.util.log.AndroidLogger
 import com.bignerdranch.android.mediafiles.util.message.GlobalBusHelper
 import dagger.Module
 import dagger.Provides
-import lombok.NonNull
-import lombok.RequiredArgsConstructor
 import javax.inject.Singleton
 
-@RequiredArgsConstructor
 @Module
 class GeneralModule(val context: Context) {
 
