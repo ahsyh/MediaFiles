@@ -19,22 +19,49 @@ class MediaStoreUtil (val contentResolver: ContentResolver, val logger: Logger) 
         val uri: Uri = getUri(mediaType) ?: return false
 
         var count: Long = 0
-//        String colName = "count";
-//        String proj = "count(" + MediaStore.MediaColumns.DATA + ") AS " + colName;
         val proj = MediaStore.MediaColumns._ID
         try {
             contentResolver.query(
                     uri, arrayOf(proj),
                     MediaStore.MediaColumns.DATA + " = ?", arrayOf(path), null)?.use { cursor ->
-                //            cursor.moveToNext()
-                //            int colIndex = cursor.getColumnIndexOrThrow(colName);
-                //            count = cursor.getLong(colIndex);
                 count = cursor.count.toLong()
             }
         } catch (e: Exception) {
             logger.v(DTAG, "problem in isPathExist:" + e.message)
         }
         return count > 0L
+    }
+
+    fun isPathsExist(
+        mediaType: MediaType,
+        paths: Collection<String>): List<Long> {
+
+        val uri: Uri = getUri(mediaType) ?: return emptyList()
+
+        if (paths.size <= 0) {
+            return emptyList()
+        }
+
+        val proj = MediaStore.MediaColumns._ID
+        val queryStr = MediaStore.MediaColumns.DATA +
+                paths.map {"?"}.joinToString(prefix = " IN (", postfix = ")", separator = ",")
+        val result: MutableList<Long> = ArrayList()
+
+        contentResolver.query(
+            uri, arrayOf(proj),
+            queryStr, paths.toTypedArray(), null)?.use { cursor ->
+
+            cursor.moveToFirst()
+
+            while (!cursor.isAfterLast) {
+                cursor.getLong(0).let {
+                    result.add(it)
+                }
+                cursor.moveToNext()
+            }
+        }
+
+        return result
     }
 
     fun fetchMediaFiles(
@@ -52,7 +79,6 @@ class MediaStoreUtil (val contentResolver: ContentResolver, val logger: Logger) 
                 MediaStore.Images.Media.DATE_TAKEN,
                 MediaStore.Images.Media.DATE_MODIFIED,
                 MediaStore.Images.Media.SIZE)
-        val parameters = arrayOf("" + offset)
         logger.v(DTAG, "in fetchMediaFiles try to fetch $limit items begin from $offset")
         try {
             val bundle = Bundle()

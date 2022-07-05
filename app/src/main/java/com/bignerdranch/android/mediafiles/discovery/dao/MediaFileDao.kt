@@ -33,4 +33,7 @@ abstract class MediaFileDao {
 
     @Delete
     abstract fun delete(mediaFile: MediaFile)
+
+    @Delete
+    abstract fun deleteAll(mediaFiles: Collection<MediaFile>)
 }
