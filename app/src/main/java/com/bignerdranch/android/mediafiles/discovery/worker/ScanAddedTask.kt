@@ -12,17 +12,15 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao,
 
     fun run() {
         logger.v(DTAG, "ScanAddedWorker start")
-        var offset: Long = 0
         val pageSize = 100
         var handledItems = 0
         while (true) {
             val files = mediaStoreUtil.fetchMediaFiles(
-                    MediaType.PHOTO, offset, pageSize)
+                    MediaType.PHOTO, handledItems, pageSize)
             val size = files.size
             if (size <= 0) break
             batchHandler(files)
             handledItems += files.size
-            offset = files[size - 1].mediaStoreId
         }
         logger.v(DTAG, "ScanAddedWorker finished, handled $handledItems files")
     }

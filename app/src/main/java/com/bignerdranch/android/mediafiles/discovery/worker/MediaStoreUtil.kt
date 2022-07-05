@@ -3,6 +3,7 @@ package com.bignerdranch.android.mediafiles.discovery.worker
 import android.content.ContentResolver
 import android.database.Cursor
 import android.net.Uri
+import android.os.Bundle
 import android.provider.MediaStore
 import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
@@ -38,13 +39,13 @@ class MediaStoreUtil (val contentResolver: ContentResolver, val logger: Logger) 
 
     fun fetchMediaFiles(
             mediaType: MediaType,
-            offset: Long,
+            offset: Int,
             limit: Int
     ): List<MediaFile> {
         val result: MutableList<MediaFile> = ArrayList(limit)
         val uri: Uri = getUri(mediaType) ?: return result
 
-        val selectors = arrayOf(
+        val projections = arrayOf(
                 MediaStore.MediaColumns._ID,
                 MediaStore.Images.Media.DATA,
                 MediaStore.Images.Media.DATE_ADDED,
@@ -54,11 +55,12 @@ class MediaStoreUtil (val contentResolver: ContentResolver, val logger: Logger) 
         val parameters = arrayOf("" + offset)
         logger.v(DTAG, "in fetchMediaFiles try to fetch $limit items begin from $offset")
         try {
-            val sortOrderStr = MediaStore.MediaColumns._ID  + " ASC" + if (limit > 0) " LIMIT $limit" else ""
-            val selection = MediaStore.MediaColumns._ID + " > ?"
-            logger.v(DTAG, "query string, uri: ${uri.toString()}, selection: $selection, sortOrder: $sortOrderStr")
+            val bundle = Bundle()
+            bundle.putInt(ContentResolver.QUERY_ARG_OFFSET, offset)
+            bundle.putInt(ContentResolver.QUERY_ARG_LIMIT, limit)
+
             contentResolver.query(
-                    uri, selectors, selection, parameters, sortOrderStr)?.use { cursor ->
+                    uri, projections, bundle, null)?.use { cursor ->
                 cursor.moveToFirst()
 
                 logger.v(DTAG, "query get ${cursor.count} photos. moveToFirst")
