@@ -6,8 +6,11 @@ import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanAddedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.ScanDeletedTask
 import com.bignerdranch.android.mediafiles.discovery.worker.WorkerSchedule
-import com.bignerdranch.android.mediafiles.util.AsyncUtil
 import com.bignerdranch.android.mediafiles.util.log.Logger
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class Discovery (val context: Context,
     val mediaFileDao: MediaFileDao,
@@ -17,17 +20,21 @@ class Discovery (val context: Context,
     val logger: Logger)  {
 
     fun initAsync() {
-        AsyncUtil.runOnIOThread { init() }
+        CoroutineScope(Dispatchers.Default).launch {
+            init()
+        }
     }
 
-    @Synchronized
-    private fun init() {
-        logger.v(DTAG, "Prework, total " + mediaFileDao.count
-                + " items, ")
-        workerSchedule.setupMediaStoreChangeWorker()
-        scan()
-        logger.v(DTAG, "Summrizy, total " + mediaFileDao.count
-                + " items, ")
+    private suspend fun init() = withContext(Dispatchers.IO) {
+        synchronized(this) {
+            workerSchedule.setupMediaStoreChangeWorker()
+            workerSchedule.setupPeriodicWorker()
+            logger.w(DTAG, "Prework, total " + mediaFileDao.count
+                    + " items, ")
+            scan()
+            logger.w(DTAG, "Summrizy, total " + mediaFileDao.count
+                    + " items, ")
+        }
     }
 
     private fun scan() {

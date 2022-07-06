@@ -18,6 +18,7 @@ class MediaFilesApplication : MultiDexApplication() {
     override fun onCreate() {
         super.onCreate()
         initDagger()
+        initStetho()
         init()
     }
 
@@ -28,9 +29,11 @@ class MediaFilesApplication : MultiDexApplication() {
         appComponent.inject(this)
     }
 
-    private fun init() {
+    private fun initStetho() {
         StethoHelper.init(this)
+    }
 
+    private fun init() {
         if (PermissionsManagerImpl.hasPermission(this, WRITE_EXTERNAL_STORAGE)) {
             logger.v(DTAG, "has permission already, start sync");
             discovery.get().initAsync();

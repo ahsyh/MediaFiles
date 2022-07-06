@@ -4,6 +4,7 @@ import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity
 import com.bignerdranch.android.mediafiles.discovery.Discovery
 import com.bignerdranch.android.mediafiles.discovery.worker.MediaChangeWorker
+import com.bignerdranch.android.mediafiles.discovery.worker.PeriodicWorker
 import com.bignerdranch.android.mediafiles.gas.dao.FillGasDao
 import com.bignerdranch.android.mediafiles.ui.dashboard.DashboardViewModel
 import com.bignerdranch.android.mediafiles.ui.home.HomeViewModel
@@ -21,6 +22,7 @@ interface GeneralComponent {
     fun inject(notificationsViewModel: NotificationsViewModel?)
     fun inject(dashboardViewModel: DashboardViewModel?)
     fun inject(mediaChangeWorker: MediaChangeWorker?)
+    fun inject(periodicWorker: PeriodicWorker?)
 
     fun getLogger(): Logger
     fun getDiscovery(): Discovery
