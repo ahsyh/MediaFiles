@@ -29,15 +29,15 @@ class Discovery (val context: Context,
         synchronized(this) {
             workerSchedule.setupMediaStoreChangeWorker()
             workerSchedule.setupPeriodicWorker()
-            logger.w(DTAG, "Prework, total " + mediaFileDao.count
-                    + " items, ")
-            scan()
-            logger.w(DTAG, "Summrizy, total " + mediaFileDao.count
-                    + " items, ")
         }
+        logger.w(DTAG, "Prework, total " + mediaFileDao.count
+                + " items, ")
+        scan()
+        logger.w(DTAG, "Summrizy, total " + mediaFileDao.count
+                + " items, ")
     }
 
-    private fun scan() {
+    private suspend fun scan() {
         addedWorker.run()
         deletedWorker.run()
     }

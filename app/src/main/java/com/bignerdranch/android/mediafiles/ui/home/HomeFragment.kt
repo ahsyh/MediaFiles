@@ -8,13 +8,16 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.paging.PagedList
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
-import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     lateinit var homeViewModel: HomeViewModel
@@ -31,7 +34,18 @@ class HomeFragment : Fragment() {
         localItemRecyclerView.layoutManager = layoutManager
         adapter = MediaFileAdapter(MediaFilesApplication.appComponent.getLogger())
         localItemRecyclerView.adapter = adapter
-        homeViewModel.liveMediaFiles.observe(viewLifecycleOwner, Observer { pagedList: PagedList<MediaFile> -> adapter.submitList(pagedList) })
+
+        //homeViewModel.liveMediaFiles.observe(viewLifecycleOwner, Observer { pagedList: PagedList<MediaFile> -> adapter.submitList(pagedList) })
+        lifecycleScope.launch {
+            // We repeat on the STARTED lifecycle because an Activity may be PAUSED
+            // but still visible on the screen, for example in a multi window app
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                homeViewModel.liveMediaFiles.collectLatest {
+                    adapter.submitData(it)
+                }
+            }
+        }
+
         homeViewModel.text.observe(viewLifecycleOwner, Observer { s -> textView.text = s })
         return root
     }

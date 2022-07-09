@@ -10,7 +10,7 @@ class ScanDeletedTask (val mediaFileDao: MediaFileDao,
                        val mediaStoreUtil: MediaStoreUtil,
                        val logger: Logger) {
 
-    private fun handleOneBatch(files: List<MediaFile>): Long {
+    private suspend fun handleOneBatch(files: List<MediaFile>): Long {
         val fileNames = files.map { it.path }.filterNotNull()
         logger.v(DTAG, "search paths cnt: "+ fileNames.size + ": " + fileNames)
         val existIDs = mediaStoreUtil.isPathsExist(MediaType.PHOTO, fileNames)
@@ -23,7 +23,7 @@ class ScanDeletedTask (val mediaFileDao: MediaFileDao,
         return pos
     }
 
-    fun run() {
+    suspend fun run() {
         logger.v(DTAG, "ScanDeletedWorker started")
         var pos = 0L
         val pageSize = 200

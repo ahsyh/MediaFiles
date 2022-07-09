@@ -9,7 +9,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +22,8 @@ import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 import com.bignerdranch.android.mediafiles.ui.recycleView.FillGasAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class NotificationsFragment : Fragment() {
     private lateinit var notificationsViewModel: NotificationsViewModel
@@ -35,7 +40,16 @@ class NotificationsFragment : Fragment() {
         localItemRecyclerView.layoutManager = layoutManager
         adapter = FillGasAdapter(context, MediaFilesApplication.appComponent.getLogger())
         localItemRecyclerView.adapter = adapter
-        notificationsViewModel.liveFillGas.observe(viewLifecycleOwner, { pagedList: PagedList<FillGasEvent> -> adapter.submitList(pagedList) })
+        //notificationsViewModel.liveFillGas.observe(viewLifecycleOwner, { pagedList: PagedList<FillGasEvent> -> adapter.submitList(pagedList) })
+        lifecycleScope.launch {
+            // We repeat on the STARTED lifecycle because an Activity may be PAUSED
+            // but still visible on the screen, for example in a multi window app
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                notificationsViewModel.liveFillGas.collectLatest {
+                    adapter.submitData(it)
+                }
+            }
+        }
 
         val textView = root.findViewById<TextView>(R.id.text_notifications)
         notificationsViewModel.text.observe(viewLifecycleOwner, { s -> textView.text = s })

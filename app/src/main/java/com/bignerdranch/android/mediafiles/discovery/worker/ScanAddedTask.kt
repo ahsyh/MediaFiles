@@ -10,7 +10,7 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao,
                      val mediaStoreUtil: MediaStoreUtil,
                      val logger: Logger) {
 
-    fun run() {
+    suspend fun run() {
         logger.v(DTAG, "ScanAddedWorker start")
         val pageSize = 100
         var handledItems = 0
@@ -25,7 +25,7 @@ class ScanAddedTask (val mediaFileDao: MediaFileDao,
         logger.v(DTAG, "ScanAddedWorker finished, handled $handledItems files")
     }
 
-    private fun batchHandler(items: List<MediaFile>) {
+    private suspend fun batchHandler(items: List<MediaFile>) {
         val newItems: MutableList<MediaFile> = ArrayList(items.size)
         for (item in items) {
             val paths = arrayOf(item.path)

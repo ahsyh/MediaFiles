@@ -1,14 +1,14 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
 import android.view.ViewGroup
-import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.glide.GlideApp
 import com.bignerdranch.android.mediafiles.util.log.Logger
 
-class MediaFileImageAdapter(val logger: Logger) : PagedListAdapter<MediaFile, MediaFileImageViewHolder>(object : DiffUtil.ItemCallback<MediaFile>() {
+class MediaFileImageAdapter(val logger: Logger) : PagingDataAdapter<MediaFile, MediaFileImageViewHolder>(object : DiffUtil.ItemCallback<MediaFile>() {
     override fun areItemsTheSame(oldItem: MediaFile, newItem: MediaFile): Boolean {
         return oldItem.id == newItem.id
     }

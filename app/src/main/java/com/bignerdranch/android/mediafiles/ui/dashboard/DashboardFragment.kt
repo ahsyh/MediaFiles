@@ -7,7 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +20,8 @@ import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileImageAdapter
 import com.bignerdranch.android.mediafiles.util.log.Logger
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class DashboardFragment : Fragment() {
     lateinit var dashboardViewModel: DashboardViewModel
@@ -37,7 +42,17 @@ class DashboardFragment : Fragment() {
         localItemRecyclerView.adapter = adapter
         val textView = root.findViewById<TextView>(R.id.text_dashboard)
         dashboardViewModel.text.observe(viewLifecycleOwner, { s -> textView.text = s })
-        dashboardViewModel.liveMediaFiles.observe(viewLifecycleOwner, { pagedList: PagedList<MediaFile> -> adapter.submitList(pagedList) })
+
+        lifecycleScope.launch {
+            // We repeat on the STARTED lifecycle because an Activity may be PAUSED
+            // but still visible on the screen, for example in a multi window app
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                dashboardViewModel.liveMediaFiles.collectLatest {
+                    adapter.submitData(it)
+                }
+            }
+        }
+
         return root
     }
 

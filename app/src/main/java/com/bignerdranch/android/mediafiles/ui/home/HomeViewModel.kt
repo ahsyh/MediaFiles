@@ -1,21 +1,24 @@
 package com.bignerdranch.android.mediafiles.ui.home
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class HomeViewModel(application: Application) : AndroidViewModel(application) {
+class HomeViewModel() : ViewModel() {
     @Inject lateinit var mediaFileDao: MediaFileDao
 
     /** Paged live data of local items.  */
-    var liveMediaFiles: LiveData<PagedList<MediaFile>>
+    val liveMediaFiles: Flow<PagingData<MediaFile>>
     var text: LiveData<String>
 
     companion object {
@@ -25,7 +28,15 @@ class HomeViewModel(application: Application) : AndroidViewModel(application) {
 
     init {
         MediaFilesApplication.appComponent.inject(this)
-        liveMediaFiles = LivePagedListBuilder(mediaFileDao.all, PAGE_SIZE).build()
+        liveMediaFiles = Pager(
+            config = PagingConfig(
+                pageSize = PAGE_SIZE,
+                enablePlaceholders = false
+            ),
+            pagingSourceFactory = { mediaFileDao.pagingSource() }
+        )
+            .flow
+            .cachedIn(viewModelScope)
         val countLiveData = mediaFileDao.liveCount
         text = Transformations.map(countLiveData) { num: Long -> "$num items found in MS" }
     }

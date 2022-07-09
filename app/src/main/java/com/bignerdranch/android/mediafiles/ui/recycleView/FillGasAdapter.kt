@@ -4,13 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 import com.bignerdranch.android.mediafiles.util.SystemUtil
 import com.bignerdranch.android.mediafiles.util.log.Logger
 
 
-class FillGasAdapter(val context: Context?, val logger: Logger) : PagedListAdapter<FillGasEvent, FillGasViewHolder>(object : DiffUtil.ItemCallback<FillGasEvent>() {
+class FillGasAdapter(val context: Context?, val logger: Logger) : PagingDataAdapter<FillGasEvent, FillGasViewHolder>(object : DiffUtil.ItemCallback<FillGasEvent>() {
     override fun areItemsTheSame(oldItem: FillGasEvent, newItem: FillGasEvent): Boolean {
         return oldItem.id == newItem.id
     }
