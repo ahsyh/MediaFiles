@@ -4,17 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
-import com.bignerdranch.android.mediafiles.R
+import com.bignerdranch.android.mediafiles.databinding.FragmentHomeBinding
 import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -25,15 +25,12 @@ class HomeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val binding = FragmentHomeBinding.inflate(layoutInflater)
+
         homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_home, container, false)
-        val textView = root.findViewById<TextView>(R.id.text_summary)
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.orientation = RecyclerView.VERTICAL
-        val localItemRecyclerView: RecyclerView = root.findViewById(R.id.mediaFilesRecyclerView)
-        localItemRecyclerView.layoutManager = layoutManager
         adapter = MediaFileAdapter(MediaFilesApplication.appComponent.getLogger())
-        localItemRecyclerView.adapter = adapter
+
+        binding.bindAdapter(adapter)
 
         //homeViewModel.liveMediaFiles.observe(viewLifecycleOwner, Observer { pagedList: PagedList<MediaFile> -> adapter.submitList(pagedList) })
         lifecycleScope.launch {
@@ -46,7 +43,20 @@ class HomeFragment : Fragment() {
             }
         }
 
-        homeViewModel.text.observe(viewLifecycleOwner, Observer { s -> textView.text = s })
-        return root
+        homeViewModel.text.observe(viewLifecycleOwner, Observer { s -> binding.textSummary.text = s })
+        return binding.root
     }
+
+    /**
+     * Sets up the [RecyclerView] and binds [MediaFileAdapter] to it
+     */
+    private fun FragmentHomeBinding.bindAdapter(mediaFileAdapter: MediaFileAdapter) {
+        mediaFilesRecyclerView.adapter = mediaFileAdapter
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.orientation = RecyclerView.VERTICAL
+        mediaFilesRecyclerView.layoutManager = layoutManager
+        val decoration = DividerItemDecoration(mediaFilesRecyclerView.context, DividerItemDecoration.VERTICAL)
+        mediaFilesRecyclerView.addItemDecoration(decoration)
+    }
+
 }

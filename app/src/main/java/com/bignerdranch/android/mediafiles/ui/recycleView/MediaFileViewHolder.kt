@@ -1,33 +1,27 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bignerdranch.android.mediafiles.R
+import com.bignerdranch.android.mediafiles.databinding.MediaFileBinding
+import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
-class MediaFileViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val idView: TextView
-    val pathView: TextView
-    val unifiedIdView: TextView
-    val addedView: TextView
-    val takenView: TextView
-    val modifiedView: TextView
+class MediaFileViewHolder(private val binding: MediaFileBinding)  : RecyclerView.ViewHolder(binding.root) {
 
-    companion object {
-        fun createFromParent(parent: ViewGroup): MediaFileViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.media_file, parent, false)
-            return MediaFileViewHolder(view)
+    fun bind(item: MediaFile) {
+        binding.apply {
+            binding.itemId.text = item.id.toString()
+            binding.itemPath.text = item.path?.substringAfterLast("/") ?: "null"
+            binding.unifiedId.text = item.mediaStoreId.toString()
+            binding.itemAdded.text = timeToDate(1000 * item.dateAdded)
+            binding.itemTaken.text = timeToDate(item.dateTaken)
+            binding.itemModified.text = timeToDate(1000 * item.dateModify)
         }
     }
 
-    init {
-        idView = itemView.findViewById(R.id.itemId)
-        pathView = itemView.findViewById(R.id.itemPath)
-        unifiedIdView = itemView.findViewById(R.id.unifiedId)
-        addedView = itemView.findViewById(R.id.itemAdded)
-        takenView = itemView.findViewById(R.id.itemTaken)
-        modifiedView = itemView.findViewById(R.id.itemModified)
+    private fun timeToDate(time: Long): String {
+        val sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US)
+        return sdf.format(Date(time))
     }
 }

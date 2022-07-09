@@ -15,6 +15,6 @@
     <dimen name="item_edit_width_middle">135dp</dimen>
 
 
-    <dimen name="item_image_width">135dp</dimen>
+    <dimen name="item_image_width">120dp</dimen>
     <dimen name="item_image_height">135dp</dimen>
 </resources>

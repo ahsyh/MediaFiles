@@ -14,14 +14,18 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.activity.AddGasRecordActivity
+import com.bignerdranch.android.mediafiles.databinding.FragmentHomeBinding
+import com.bignerdranch.android.mediafiles.databinding.FragmentNotificationsBinding
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 import com.bignerdranch.android.mediafiles.ui.recycleView.FillGasAdapter
+import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileAdapter
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -32,15 +36,11 @@ class NotificationsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_notifications, container, false)
+        val binding = FragmentNotificationsBinding.inflate(layoutInflater)
 
-        val layoutManager = LinearLayoutManager(context)
-        layoutManager.orientation = RecyclerView.VERTICAL
-        val localItemRecyclerView: RecyclerView = root.findViewById(R.id.gasFillRecyclerView)
-        localItemRecyclerView.layoutManager = layoutManager
         adapter = FillGasAdapter(context, MediaFilesApplication.appComponent.getLogger())
-        localItemRecyclerView.adapter = adapter
-        //notificationsViewModel.liveFillGas.observe(viewLifecycleOwner, { pagedList: PagedList<FillGasEvent> -> adapter.submitList(pagedList) })
+        binding.bindAdapter(adapter)
+
         lifecycleScope.launch {
             // We repeat on the STARTED lifecycle because an Activity may be PAUSED
             // but still visible on the screen, for example in a multi window app
@@ -51,16 +51,26 @@ class NotificationsFragment : Fragment() {
             }
         }
 
-        val textView = root.findViewById<TextView>(R.id.text_notifications)
-        notificationsViewModel.text.observe(viewLifecycleOwner, { s -> textView.text = s })
+        notificationsViewModel.text.observe(viewLifecycleOwner, { s -> binding.textNotifications.text = s })
 
-        val button = root.findViewById<Button>(R.id.addGasRecordButton)
-        button.setOnClickListener {
+        binding.addGasRecordButton.setOnClickListener {
             Log.e(DTAG, "setOnClickListener")
             val intent = Intent(context, AddGasRecordActivity::class.java)
             startActivity(intent)
         }
 
-        return root
+        return binding.root
+    }
+
+    /**
+     * Sets up the [RecyclerView] and binds [MediaFileAdapter] to it
+     */
+    private fun FragmentNotificationsBinding.bindAdapter(fillGasAdapter: FillGasAdapter) {
+        gasFillRecyclerView.adapter = fillGasAdapter
+        val layoutManager = LinearLayoutManager(context)
+        layoutManager.orientation = RecyclerView.VERTICAL
+        gasFillRecyclerView.layoutManager = layoutManager
+        val decoration = DividerItemDecoration(gasFillRecyclerView.context, DividerItemDecoration.VERTICAL)
+        gasFillRecyclerView.addItemDecoration(decoration)
     }
 }

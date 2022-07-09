@@ -1,35 +1,21 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bignerdranch.android.mediafiles.R
+import com.bignerdranch.android.mediafiles.databinding.FillGasBinding
+import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
+import com.bignerdranch.android.mediafiles.util.SystemUtil
 
 
-class FillGasViewHolder private constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    val gasAddedDateView: TextView
-    val gasRecordDateView: TextView
-    val gasVolumeView: TextView
-    val gasDistanceView: TextView
-    val gasPriceView: TextView
-    val gasStationView: TextView
+class FillGasViewHolder(private val binding: FillGasBinding) : RecyclerView.ViewHolder(binding.root) {
 
-
-    companion object {
-        fun createFromParent(parent: ViewGroup): FillGasViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.fill_gas, parent, false)
-            return FillGasViewHolder(view)
+    fun bind(item: FillGasEvent) {
+        binding.apply {
+            binding.gasStation.text = item.gasStation
+            binding.gasVolume.text = "${item.volume/1000}.${"%03d".format(item.volume%1000)}"
+            binding.gasPrice.text = "${item.price/100}.${"%02d".format(item.price%100)}"
+            binding.gasDistance.text = item.distance.toString()
+            binding.gasAddedDate.text = SystemUtil.timeToDate(item.dateAdded)
+            binding.gasRecordDate.text = SystemUtil.timeToDate(item.dateRecord)
         }
-    }
-
-    init {
-        gasAddedDateView = itemView.findViewById(R.id.gasAddedDate)
-        gasRecordDateView = itemView.findViewById(R.id.gasRecordDate)
-        gasVolumeView = itemView.findViewById(R.id.gasVolume)
-        gasDistanceView = itemView.findViewById(R.id.gasDistance)
-        gasPriceView = itemView.findViewById(R.id.gasPrice)
-        gasStationView = itemView.findViewById(R.id.gasStation)
     }
 }

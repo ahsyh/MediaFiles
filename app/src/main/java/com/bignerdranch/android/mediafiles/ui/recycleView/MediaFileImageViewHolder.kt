@@ -1,30 +1,19 @@
 package com.bignerdranch.android.mediafiles.ui.recycleView
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bignerdranch.android.mediafiles.R
+import com.bignerdranch.android.mediafiles.databinding.MediaFileImageBinding
+import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
+import com.bignerdranch.android.mediafiles.glide.GlideApp
 
-class MediaFileImageViewHolder private constructor(itemView: View, context: Context) : RecyclerView.ViewHolder(itemView) {
-    val imageView: ImageView
-    val textView: TextView
-    val context: Context
+class MediaFileImageViewHolder(private val binding: MediaFileImageBinding, private val context: Context) : RecyclerView.ViewHolder(binding.root) {
 
-    companion object {
-        fun createFromParent(parent: ViewGroup): MediaFileImageViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.media_file_image, parent, false)
-            val context = parent.context
-            return MediaFileImageViewHolder(view, context)
+    fun bind(item: MediaFile) {
+        val path: String?
+        if (item.path != null) {
+            path = item.path
+            binding.itemName.text = "image"
+            GlideApp.with(context).load(path).into(binding.gridItemImage)
         }
-    }
-
-    init {
-        imageView = itemView.findViewById(R.id.grid_item_image_view)
-        textView = itemView.findViewById(R.id.item_name)
-        this.context = context
     }
 }

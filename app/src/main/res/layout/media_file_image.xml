@@ -9,14 +9,14 @@
 
     <!-- Local Id -->
     <TextView
-        android:id="@+id/item_name"
+        android:id="@+id/itemName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/item_list_field_margin_end"
         android:gravity="start"/>
 
     <ImageView
-        android:id="@+id/grid_item_image_view"
+        android:id="@+id/gridItemImage"
         android:layout_width="@dimen/item_image_width"
         android:layout_height="@dimen/item_image_height"
         android:scaleType="centerCrop" />
