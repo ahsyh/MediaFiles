@@ -37,7 +37,6 @@ class HomeViewModel() : ViewModel() {
         )
             .flow
             .cachedIn(viewModelScope)
-        val countLiveData = mediaFileDao.liveCount
-        text = Transformations.map(countLiveData) { num: Long -> "$num items found in MS" }
+        text = Transformations.map(mediaFileDao.liveCount) { num: Long -> "$num items found in MS" }
     }
 }

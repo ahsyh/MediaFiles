@@ -1,28 +1,25 @@
-package com.bignerdranch.android.mediafiles.ui.dashboard
+package com.bignerdranch.android.mediafiles.ui.fillGas
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
-import com.bignerdranch.android.mediafiles.discovery.dao.MediaFileDao
-import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
-import com.bignerdranch.android.mediafiles.ui.home.HomeViewModel
+import com.bignerdranch.android.mediafiles.gas.dao.FillGasDao
+import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class DashboardViewModel : ViewModel() {
-    @Inject lateinit var mediaFileDao: MediaFileDao
+class FillGasViewModel : ViewModel() {
+    @Inject lateinit var fillGasDao: FillGasDao
 
     /** Paged live data of local items.  */
-    val liveMediaFiles: Flow<PagingData<MediaFile>>
-    val text: MutableLiveData<String>
+    val liveFillGas: Flow<PagingData<FillGasEvent>>
+    var text: LiveData<String>
 
     companion object {
         /** Page size for viewing database records.  */
@@ -31,16 +28,18 @@ class DashboardViewModel : ViewModel() {
 
     init {
         MediaFilesApplication.appComponent.inject(this)
-        liveMediaFiles = Pager(
+
+        liveFillGas = Pager(
             config = PagingConfig(
                 pageSize = PAGE_SIZE,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { mediaFileDao.pagingSource() }
+            pagingSourceFactory = { fillGasDao.pagingSource() }
         )
             .flow
             .cachedIn(viewModelScope)
-        text = MutableLiveData()
-        text.value = "Photos Thumbnail"
+
+        val countLiveData = fillGasDao.liveCount
+        text = Transformations.map(countLiveData) { num: Long -> "$num record found in database" }
     }
 }

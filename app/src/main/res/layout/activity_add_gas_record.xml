@@ -43,7 +43,7 @@
                         android:gravity="center_vertical"/>
 
                     <EditText
-                        android:id="@+id/gas_added_date_value"
+                        android:id="@+id/gasAddedDateText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="4"
@@ -53,7 +53,7 @@
                         android:inputType="date" />
 
                     <Button
-                        android:id="@+id/gas_added_date_picker"
+                        android:id="@+id/gasAddedDateButton"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -81,7 +81,7 @@
                         android:gravity="center_vertical"/>
 
                     <EditText
-                        android:id="@+id/gas_station_value"
+                        android:id="@+id/gasStationText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
@@ -109,7 +109,7 @@
                         android:gravity="center_vertical"/>
 
                     <EditText
-                        android:id="@+id/gas_volume_value"
+                        android:id="@+id/gasVolumeText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
@@ -137,7 +137,7 @@
                         android:gravity="center_vertical"/>
 
                     <EditText
-                        android:id="@+id/gas_distance_value"
+                        android:id="@+id/gasDistanceText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"
@@ -165,7 +165,7 @@
                         android:gravity="center_vertical"/>
 
                     <EditText
-                        android:id="@+id/gas_price_value"
+                        android:id="@+id/gasPriceText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5"

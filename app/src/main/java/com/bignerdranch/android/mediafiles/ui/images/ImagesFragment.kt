@@ -1,54 +1,49 @@
-package com.bignerdranch.android.mediafiles.ui.dashboard
+package com.bignerdranch.android.mediafiles.ui.images
 
 import android.util.DisplayMetrics;
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.paging.PagedList
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bignerdranch.android.mediafiles.DTAG
 import com.bignerdranch.android.mediafiles.MediaFilesApplication
 import com.bignerdranch.android.mediafiles.R
 import com.bignerdranch.android.mediafiles.databinding.FragmentDashboardBinding
-import com.bignerdranch.android.mediafiles.databinding.FragmentHomeBinding
-import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileAdapter
 import com.bignerdranch.android.mediafiles.ui.recycleView.MediaFileImageAdapter
 import com.bignerdranch.android.mediafiles.util.log.Logger
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class DashboardFragment : Fragment() {
-    lateinit var dashboardViewModel: DashboardViewModel
+class ImagesFragment : Fragment() {
+    lateinit var imagesViewModel: ImagesViewModel
     lateinit var adapter: MediaFileImageAdapter
     lateinit var logger: Logger
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?, savedInstanceState: Bundle?): View? {
         logger = MediaFilesApplication.appComponent.getLogger()
-        dashboardViewModel = ViewModelProvider(this).get(DashboardViewModel::class.java)
+        imagesViewModel = ViewModelProvider(this).get(ImagesViewModel::class.java)
         adapter = MediaFileImageAdapter(logger)
 
         val binding = FragmentDashboardBinding.inflate(layoutInflater)
         binding.bindAdapter(adapter)
 
-        dashboardViewModel.text.observe(viewLifecycleOwner, { s -> binding.textDashboard.text = s })
+        imagesViewModel.text.observe(viewLifecycleOwner, { s -> binding.textDashboard.text = s })
 
         lifecycleScope.launch {
             // We repeat on the STARTED lifecycle because an Activity may be PAUSED
             // but still visible on the screen, for example in a multi window app
             repeatOnLifecycle(Lifecycle.State.STARTED) {
-                dashboardViewModel.liveMediaFiles.collectLatest {
+                imagesViewModel.liveMediaFiles.collectLatest {
                     adapter.submitData(it)
                 }
             }

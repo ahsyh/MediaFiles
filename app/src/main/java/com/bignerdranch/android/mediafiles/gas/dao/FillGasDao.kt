@@ -9,6 +9,8 @@ import androidx.room.Insert
 import androidx.room.Query
 import com.bignerdranch.android.mediafiles.discovery.model.MediaFile
 import com.bignerdranch.android.mediafiles.gas.model.FillGasEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 @Dao
 interface FillGasDao {
@@ -26,12 +28,12 @@ interface FillGasDao {
     abstract val liveCount: LiveData<Long>
 
     @Insert
-    abstract fun insertAll(fillGasEvents: Collection<FillGasEvent>)
+    suspend fun insertAll(fillGasEvents: Collection<FillGasEvent>)
 
     @Delete
     abstract fun delete(fillGasEvent: FillGasEvent)
 
-    fun addOneRecord(event: FillGasEvent) {
+    suspend fun addOneRecord(event: FillGasEvent) = withContext(Dispatchers.IO) {
         val fillGasEvents = ArrayList<FillGasEvent>()
         fillGasEvents.add(event)
         insertAll(fillGasEvents)
